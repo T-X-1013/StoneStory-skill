@@ -1,0 +1,962 @@
+[
+  {
+    "chapter_id": "chapter_001",
+    "chapter_no": 1,
+    "chapter_label": "第一回",
+    "title": "甄士隐梦幻识通灵 贾雨村风尘怀闺秀",
+    "paragraph_count": 40,
+    "source_text_length": 7510
+  },
+  {
+    "chapter_id": "chapter_002",
+    "chapter_no": 2,
+    "chapter_label": "第二回",
+    "title": "贾夫人仙逝扬州城 冷子兴演说荣国府",
+    "paragraph_count": 25,
+    "source_text_length": 6047
+  },
+  {
+    "chapter_id": "chapter_003",
+    "chapter_no": 3,
+    "chapter_label": "第三回",
+    "title": "金陵城起复贾雨村 荣国府收养林黛玉",
+    "paragraph_count": 26,
+    "source_text_length": 8559
+  },
+  {
+    "chapter_id": "chapter_004",
+    "chapter_no": 4,
+    "chapter_label": "第四回",
+    "title": "薄命女偏逢薄命郎 葫芦僧乱判葫芦案",
+    "paragraph_count": 22,
+    "source_text_length": 6033
+  },
+  {
+    "chapter_id": "chapter_005",
+    "chapter_no": 5,
+    "chapter_label": "第五回",
+    "title": "游幻境指迷十二钗 饮仙醪曲演红楼梦",
+    "paragraph_count": 76,
+    "source_text_length": 7609
+  },
+  {
+    "chapter_id": "chapter_006",
+    "chapter_no": 6,
+    "chapter_label": "第六回",
+    "title": "贾宝玉初试云雨情 刘姥姥一进荣国府",
+    "paragraph_count": 28,
+    "source_text_length": 7419
+  },
+  {
+    "chapter_id": "chapter_007",
+    "chapter_no": 7,
+    "chapter_label": "第七回",
+    "title": "送宫花周瑞叹英莲 谈肆业秦钟结宝玉",
+    "paragraph_count": 26,
+    "source_text_length": 7414
+  },
+  {
+    "chapter_id": "chapter_008",
+    "chapter_no": 8,
+    "chapter_label": "第八回",
+    "title": "薛宝钗小恙梨香院 贾宝玉大醉绛芸轩",
+    "paragraph_count": 26,
+    "source_text_length": 6646
+  },
+  {
+    "chapter_id": "chapter_009",
+    "chapter_no": 9,
+    "chapter_label": "第九回",
+    "title": "恋风流情友入家塾 起嫌疑顽童闹学堂",
+    "paragraph_count": 16,
+    "source_text_length": 5678
+  },
+  {
+    "chapter_id": "chapter_010",
+    "chapter_no": 10,
+    "chapter_label": "第十回",
+    "title": "金寡妇贪利权受辱 张太医论病细穷源",
+    "paragraph_count": 17,
+    "source_text_length": 5090
+  },
+  {
+    "chapter_id": "chapter_011",
+    "chapter_no": 11,
+    "chapter_label": "第十一回",
+    "title": "庆寿辰宁府排家宴 见熙凤贾瑞起淫心",
+    "paragraph_count": 24,
+    "source_text_length": 5867
+  },
+  {
+    "chapter_id": "chapter_012",
+    "chapter_no": 12,
+    "chapter_label": "第十二回",
+    "title": "王熙凤毒设相思局 贾天祥正照风月鉴",
+    "paragraph_count": 15,
+    "source_text_length": 4253
+  },
+  {
+    "chapter_id": "chapter_013",
+    "chapter_no": 13,
+    "chapter_label": "第十三回",
+    "title": "秦可卿死封龙禁尉 王熙凤协理宁国府",
+    "paragraph_count": 21,
+    "source_text_length": 5155
+  },
+  {
+    "chapter_id": "chapter_014",
+    "chapter_no": 14,
+    "chapter_label": "第十四回",
+    "title": "林如海捐馆扬州城 贾宝玉路谒北静王",
+    "paragraph_count": 24,
+    "source_text_length": 5579
+  },
+  {
+    "chapter_id": "chapter_015",
+    "chapter_no": 15,
+    "chapter_label": "第十五回",
+    "title": "王凤姐弄权铁槛寺 秦鲸卿得趣馒头庵",
+    "paragraph_count": 18,
+    "source_text_length": 5039
+  },
+  {
+    "chapter_id": "chapter_016",
+    "chapter_no": 16,
+    "chapter_label": "第十六回",
+    "title": "贾元春才选凤藻宫 秦鲸卿夭逝黄泉路",
+    "paragraph_count": 26,
+    "source_text_length": 7546
+  },
+  {
+    "chapter_id": "chapter_017",
+    "chapter_no": 17,
+    "chapter_label": "第十七回",
+    "title": "大观园试才题对额 怡红院迷路探曲折",
+    "paragraph_count": 38,
+    "source_text_length": 7800
+  },
+  {
+    "chapter_id": "chapter_018",
+    "chapter_no": 18,
+    "chapter_label": "第十八回",
+    "title": "林黛玉误剪香袋囊 贾元春归省庆元宵",
+    "paragraph_count": 43,
+    "source_text_length": 8474
+  },
+  {
+    "chapter_id": "chapter_019",
+    "chapter_no": 19,
+    "chapter_label": "第十九回",
+    "title": "情切切良宵花解语 意绵绵静日玉生香",
+    "paragraph_count": 34,
+    "source_text_length": 9182
+  },
+  {
+    "chapter_id": "chapter_020",
+    "chapter_no": 20,
+    "chapter_label": "第二十回",
+    "title": "王熙凤正言弹妒意 林黛玉俏语谑娇音",
+    "paragraph_count": 16,
+    "source_text_length": 5286
+  },
+  {
+    "chapter_id": "chapter_021",
+    "chapter_no": 21,
+    "chapter_label": "第二十一回",
+    "title": "贤袭人娇嗔箴宝玉 俏平儿软语救贾琏",
+    "paragraph_count": 21,
+    "source_text_length": 6028
+  },
+  {
+    "chapter_id": "chapter_022",
+    "chapter_no": 22,
+    "chapter_label": "第二十二回",
+    "title": "听曲文宝玉悟禅机 制灯迷贾政悲谶语",
+    "paragraph_count": 45,
+    "source_text_length": 7032
+  },
+  {
+    "chapter_id": "chapter_023",
+    "chapter_no": 23,
+    "chapter_label": "第二十三回",
+    "title": "西厢记妙词通戏语 牡丹亭艳曲警芳心",
+    "paragraph_count": 25,
+    "source_text_length": 5424
+  },
+  {
+    "chapter_id": "chapter_024",
+    "chapter_no": 24,
+    "chapter_label": "第二十四回",
+    "title": "醉金刚轻财尚义侠 痴女儿遗帕惹相思",
+    "paragraph_count": 31,
+    "source_text_length": 8570
+  },
+  {
+    "chapter_id": "chapter_025",
+    "chapter_no": 25,
+    "chapter_label": "第二十五回",
+    "title": "魇魔法叔嫂逢五鬼 通灵玉蒙蔽遇双真",
+    "paragraph_count": 31,
+    "source_text_length": 8118
+  },
+  {
+    "chapter_id": "chapter_026",
+    "chapter_no": 26,
+    "chapter_label": "第二十六回",
+    "title": "蜂腰桥设言传密意 湘馆春困发幽情",
+    "paragraph_count": 33,
+    "source_text_length": 7286
+  },
+  {
+    "chapter_id": "chapter_027",
+    "chapter_no": 27,
+    "chapter_label": "第二十七回",
+    "title": "滴翠亭杨妃戏彩蝶 埋香冢飞燕泣残红",
+    "paragraph_count": 20,
+    "source_text_length": 6300
+  },
+  {
+    "chapter_id": "chapter_028",
+    "chapter_no": 28,
+    "chapter_label": "第二十八回",
+    "title": "蒋玉菡情赠茜香罗 薛宝钗羞笼红麝串",
+    "paragraph_count": 59,
+    "source_text_length": 9551
+  },
+  {
+    "chapter_id": "chapter_029",
+    "chapter_no": 29,
+    "chapter_label": "第二十九回",
+    "title": "享福人福深还祷福 痴情女情重愈斟情",
+    "paragraph_count": 26,
+    "source_text_length": 8617
+  },
+  {
+    "chapter_id": "chapter_030",
+    "chapter_no": 30,
+    "chapter_label": "第三十回",
+    "title": "宝钗借扇机带双敲 龄官划蔷痴及局外",
+    "paragraph_count": 15,
+    "source_text_length": 5785
+  },
+  {
+    "chapter_id": "chapter_031",
+    "chapter_no": 31,
+    "chapter_label": "第三十一回",
+    "title": "撕扇子作千金一笑 因麒麟伏白首双星",
+    "paragraph_count": 10,
+    "source_text_length": 7211
+  },
+  {
+    "chapter_id": "chapter_032",
+    "chapter_no": 32,
+    "chapter_label": "第三十二回",
+    "title": "诉肺腑心迷活宝玉 含耻辱情烈死金钏",
+    "paragraph_count": 11,
+    "source_text_length": 5843
+  },
+  {
+    "chapter_id": "chapter_033",
+    "chapter_no": 33,
+    "chapter_label": "第三十三回",
+    "title": "手足耽耽小动唇舌 不肖种种大承笞挞",
+    "paragraph_count": 10,
+    "source_text_length": 4848
+  },
+  {
+    "chapter_id": "chapter_034",
+    "chapter_no": 34,
+    "chapter_label": "第三十四回",
+    "title": "情中情因情感妹妹 错里错以错劝哥哥",
+    "paragraph_count": 18,
+    "source_text_length": 7335
+  },
+  {
+    "chapter_id": "chapter_035",
+    "chapter_no": 35,
+    "chapter_label": "第三十五回",
+    "title": "白玉钏亲尝莲叶羹 黄金莺巧结梅花络",
+    "paragraph_count": 16,
+    "source_text_length": 7946
+  },
+  {
+    "chapter_id": "chapter_036",
+    "chapter_no": 36,
+    "chapter_label": "第三十六回",
+    "title": "绣鸳鸯梦兆绛芸轩 识分定情悟梨香院",
+    "paragraph_count": 13,
+    "source_text_length": 6744
+  },
+  {
+    "chapter_id": "chapter_037",
+    "chapter_no": 37,
+    "chapter_label": "第三十七回",
+    "title": "秋爽斋偶结海棠社 蘅芜苑夜拟菊花题",
+    "paragraph_count": 31,
+    "source_text_length": 9142
+  },
+  {
+    "chapter_id": "chapter_038",
+    "chapter_no": 38,
+    "chapter_label": "第三十八回",
+    "title": "林潇湘魁夺菊花诗 薛蘅芜讽和螃蟹咏",
+    "paragraph_count": 30,
+    "source_text_length": 5582
+  },
+  {
+    "chapter_id": "chapter_039",
+    "chapter_no": 39,
+    "chapter_label": "第三十九回",
+    "title": "村姥姥是信口开合 情哥哥偏寻根究底",
+    "paragraph_count": 10,
+    "source_text_length": 6277
+  },
+  {
+    "chapter_id": "chapter_040",
+    "chapter_no": 40,
+    "chapter_label": "第四十回",
+    "title": "史太君两宴大观园 金鸳鸯三宣牙牌令",
+    "paragraph_count": 17,
+    "source_text_length": 9412
+  },
+  {
+    "chapter_id": "chapter_041",
+    "chapter_no": 41,
+    "chapter_label": "第四十一回",
+    "title": "栊翠庵茶品梅花雪 怡红院劫遇母蝗虫",
+    "paragraph_count": 17,
+    "source_text_length": 6495
+  },
+  {
+    "chapter_id": "chapter_042",
+    "chapter_no": 42,
+    "chapter_label": "第四十二回",
+    "title": "蘅芜君兰言解疑癖 潇湘子雅谑补余香",
+    "paragraph_count": 19,
+    "source_text_length": 7594
+  },
+  {
+    "chapter_id": "chapter_043",
+    "chapter_no": 43,
+    "chapter_label": "第四十三回",
+    "title": "闲取乐偶攒金庆寿 不了情暂撮土为香",
+    "paragraph_count": 19,
+    "source_text_length": 6662
+  },
+  {
+    "chapter_id": "chapter_044",
+    "chapter_no": 44,
+    "chapter_label": "第四十四回",
+    "title": "变生不测凤姐泼醋 喜出望外平儿理妆",
+    "paragraph_count": 20,
+    "source_text_length": 6715
+  },
+  {
+    "chapter_id": "chapter_045",
+    "chapter_no": 45,
+    "chapter_label": "第四十五回",
+    "title": "金兰契互剖金兰语 风雨夕闷制风雨词",
+    "paragraph_count": 23,
+    "source_text_length": 7768
+  },
+  {
+    "chapter_id": "chapter_046",
+    "chapter_no": 46,
+    "chapter_label": "第四十六回",
+    "title": "尴尬人难免尴尬事 鸳鸯女誓绝鸳鸯偶",
+    "paragraph_count": 22,
+    "source_text_length": 8270
+  },
+  {
+    "chapter_id": "chapter_047",
+    "chapter_no": 47,
+    "chapter_label": "第四十七回",
+    "title": "呆霸王调情遭苦打 冷郎君惧祸走他乡",
+    "paragraph_count": 20,
+    "source_text_length": 7328
+  },
+  {
+    "chapter_id": "chapter_048",
+    "chapter_no": 48,
+    "chapter_label": "第四十八回",
+    "title": "滥情人情误思游艺 慕雅女雅集苦吟诗",
+    "paragraph_count": 23,
+    "source_text_length": 6701
+  },
+  {
+    "chapter_id": "chapter_049",
+    "chapter_no": 49,
+    "chapter_label": "第四十九回",
+    "title": "琉璃世界白雪红梅 脂粉香娃割腥啖膻",
+    "paragraph_count": 27,
+    "source_text_length": 7386
+  },
+  {
+    "chapter_id": "chapter_050",
+    "chapter_no": 50,
+    "chapter_label": "第五十回",
+    "title": "芦雪庵争联即景诗 暖香坞雅制春灯谜",
+    "paragraph_count": 106,
+    "source_text_length": 7080
+  },
+  {
+    "chapter_id": "chapter_051",
+    "chapter_no": 51,
+    "chapter_label": "第五十一回",
+    "title": "薛小妹新编怀古诗 胡庸医乱用虎狼药",
+    "paragraph_count": 31,
+    "source_text_length": 6923
+  },
+  {
+    "chapter_id": "chapter_052",
+    "chapter_no": 52,
+    "chapter_label": "第五十二回",
+    "title": "俏平儿情掩虾须镯 勇晴雯病补雀金裘",
+    "paragraph_count": 24,
+    "source_text_length": 8338
+  },
+  {
+    "chapter_id": "chapter_053",
+    "chapter_no": 53,
+    "chapter_label": "第五十三回",
+    "title": "宁国府除夕祭宗祠 国府元宵开夜宴",
+    "paragraph_count": 32,
+    "source_text_length": 8215
+  },
+  {
+    "chapter_id": "chapter_054",
+    "chapter_no": 54,
+    "chapter_label": "第五十四回",
+    "title": "史太君破陈腐旧套 王熙凤效戏彩斑衣",
+    "paragraph_count": 26,
+    "source_text_length": 8855
+  },
+  {
+    "chapter_id": "chapter_055",
+    "chapter_no": 55,
+    "chapter_label": "第五十五回",
+    "title": "辱亲女愚妾争闲气 欺幼主刁奴蓄险心",
+    "paragraph_count": 23,
+    "source_text_length": 8152
+  },
+  {
+    "chapter_id": "chapter_056",
+    "chapter_no": 56,
+    "chapter_label": "第五十六回",
+    "title": "敏探春兴利除宿弊 时宝钗小惠全大体",
+    "paragraph_count": 21,
+    "source_text_length": 8787
+  },
+  {
+    "chapter_id": "chapter_057",
+    "chapter_no": 57,
+    "chapter_label": "第五十七回",
+    "title": "慧紫鹃情辞试忙玉 慈姨妈爱语慰痴颦",
+    "paragraph_count": 32,
+    "source_text_length": 11292
+  },
+  {
+    "chapter_id": "chapter_058",
+    "chapter_no": 58,
+    "chapter_label": "第五十八回",
+    "title": "杏子阴假凤泣虚凰 茜纱窗真情揆痴理",
+    "paragraph_count": 22,
+    "source_text_length": 7047
+  },
+  {
+    "chapter_id": "chapter_059",
+    "chapter_no": 59,
+    "chapter_label": "第五十九回",
+    "title": "柳叶渚边嗔莺咤燕 绛云轩里召将飞符",
+    "paragraph_count": 19,
+    "source_text_length": 5037
+  },
+  {
+    "chapter_id": "chapter_060",
+    "chapter_no": 60,
+    "chapter_label": "第六十回",
+    "title": "茉莉粉替去蔷薇硝 玫瑰露引来茯苓霜",
+    "paragraph_count": 28,
+    "source_text_length": 7549
+  },
+  {
+    "chapter_id": "chapter_061",
+    "chapter_no": 61,
+    "chapter_label": "第六十一回",
+    "title": "投鼠忌器宝玉瞒赃 判冤决狱平儿行权",
+    "paragraph_count": 18,
+    "source_text_length": 6638
+  },
+  {
+    "chapter_id": "chapter_062",
+    "chapter_no": 62,
+    "chapter_label": "第六十二回",
+    "title": "憨湘云醉眠芍药裀 呆香菱情解石榴裙",
+    "paragraph_count": 50,
+    "source_text_length": 11949
+  },
+  {
+    "chapter_id": "chapter_063",
+    "chapter_no": 63,
+    "chapter_label": "第六十三回",
+    "title": "寿怡红群芳开夜宴 死金丹独艳理亲丧",
+    "paragraph_count": 51,
+    "source_text_length": 11322
+  },
+  {
+    "chapter_id": "chapter_064",
+    "chapter_no": 64,
+    "chapter_label": "第六十四回",
+    "title": "幽淑女悲题五美吟 浪荡子情遗九龙佩",
+    "paragraph_count": 38,
+    "source_text_length": 9847
+  },
+  {
+    "chapter_id": "chapter_065",
+    "chapter_no": 65,
+    "chapter_label": "第六十五回",
+    "title": "贾二舍偷娶尤二姨 尤三姐思嫁柳二郎",
+    "paragraph_count": 20,
+    "source_text_length": 6931
+  },
+  {
+    "chapter_id": "chapter_066",
+    "chapter_no": 66,
+    "chapter_label": "第六十六回",
+    "title": "情小妹耻情归地府 冷二郎一冷入空门",
+    "paragraph_count": 16,
+    "source_text_length": 5118
+  },
+  {
+    "chapter_id": "chapter_067",
+    "chapter_no": 67,
+    "chapter_label": "第六十七回",
+    "title": "馈土物颦卿念故里 讯家童凤姐讯家童",
+    "paragraph_count": 30,
+    "source_text_length": 9397
+  },
+  {
+    "chapter_id": "chapter_068",
+    "chapter_no": 68,
+    "chapter_label": "第六十八回",
+    "title": "苦尤娘赚入大观园 酸凤姐大闹宁国府",
+    "paragraph_count": 21,
+    "source_text_length": 7495
+  },
+  {
+    "chapter_id": "chapter_069",
+    "chapter_no": 69,
+    "chapter_label": "第六十九回",
+    "title": "弄小巧用借剑杀人 觉大限吞生金自逝",
+    "paragraph_count": 24,
+    "source_text_length": 7244
+  },
+  {
+    "chapter_id": "chapter_070",
+    "chapter_no": 70,
+    "chapter_label": "第七十回",
+    "title": "林黛玉重建桃花社 史湘云偶填柳絮词",
+    "paragraph_count": 36,
+    "source_text_length": 6429
+  },
+  {
+    "chapter_id": "chapter_071",
+    "chapter_no": 71,
+    "chapter_label": "第七十一回",
+    "title": "嫌隙人有心生嫌隙 鸳鸯女无意遇鸳鸯",
+    "paragraph_count": 30,
+    "source_text_length": 9113
+  },
+  {
+    "chapter_id": "chapter_072",
+    "chapter_no": 72,
+    "chapter_label": "第七十二回",
+    "title": "王熙凤恃强羞说病 来旺妇倚势霸成亲",
+    "paragraph_count": 20,
+    "source_text_length": 7576
+  },
+  {
+    "chapter_id": "chapter_073",
+    "chapter_no": 73,
+    "chapter_label": "第七十三回",
+    "title": "痴丫头误拾绣春囊 懦小姐不问累金凤",
+    "paragraph_count": 20,
+    "source_text_length": 7526
+  },
+  {
+    "chapter_id": "chapter_074",
+    "chapter_no": 74,
+    "chapter_label": "第七十四回",
+    "title": "惑奸谗抄检大观园 矢孤介杜绝宁国府",
+    "paragraph_count": 35,
+    "source_text_length": 11117
+  },
+  {
+    "chapter_id": "chapter_075",
+    "chapter_no": 75,
+    "chapter_label": "第七十五回",
+    "title": "开夜宴异兆发悲音 赏中秋新词得佳谶",
+    "paragraph_count": 27,
+    "source_text_length": 9662
+  },
+  {
+    "chapter_id": "chapter_076",
+    "chapter_no": 76,
+    "chapter_label": "第七十六回",
+    "title": "凸碧堂品笛感凄清 凹晶馆联诗悲寂寞",
+    "paragraph_count": 66,
+    "source_text_length": 7596
+  },
+  {
+    "chapter_id": "chapter_077",
+    "chapter_no": 77,
+    "chapter_label": "第七十七回",
+    "title": "俏丫鬟抱屈夭风流 美优伶斩情归水月",
+    "paragraph_count": 34,
+    "source_text_length": 10741
+  },
+  {
+    "chapter_id": "chapter_078",
+    "chapter_no": 78,
+    "chapter_label": "第七十八回",
+    "title": "老学士闲征姽婳词 痴公子杜撰芙蓉诔",
+    "paragraph_count": 57,
+    "source_text_length": 10852
+  },
+  {
+    "chapter_id": "chapter_079",
+    "chapter_no": 79,
+    "chapter_label": "第七十九回",
+    "title": "薛文龙悔娶河东狮 贾迎春误嫁中山狼",
+    "paragraph_count": 17,
+    "source_text_length": 4827
+  },
+  {
+    "chapter_id": "chapter_080",
+    "chapter_no": 80,
+    "chapter_label": "第八十回",
+    "title": "懦弱迎春肠回九曲 姣怯香菱病入膏肓",
+    "paragraph_count": 22,
+    "source_text_length": 6913
+  },
+  {
+    "chapter_id": "chapter_081",
+    "chapter_no": 81,
+    "chapter_label": "第八十一回",
+    "title": "占旺相四美钓游鱼 奉严词两番入家塾",
+    "paragraph_count": 16,
+    "source_text_length": 6866
+  },
+  {
+    "chapter_id": "chapter_082",
+    "chapter_no": 82,
+    "chapter_label": "第八十二回",
+    "title": "老学究讲义警玩心 病潇湘痴魂惊恶梦",
+    "paragraph_count": 15,
+    "source_text_length": 8430
+  },
+  {
+    "chapter_id": "chapter_083",
+    "chapter_no": 83,
+    "chapter_label": "第八十三回",
+    "title": "省宫闱贾元妃染恙 闹闺阃薛宝钗吞声",
+    "paragraph_count": 20,
+    "source_text_length": 8131
+  },
+  {
+    "chapter_id": "chapter_084",
+    "chapter_no": 84,
+    "chapter_label": "第八十四回",
+    "title": "试文字宝玉始提亲 探惊风贾环重结怨",
+    "paragraph_count": 19,
+    "source_text_length": 7689
+  },
+  {
+    "chapter_id": "chapter_085",
+    "chapter_no": 85,
+    "chapter_label": "第八十五回",
+    "title": "贾存周报升郎中任 薛文起复惹放流刑",
+    "paragraph_count": 27,
+    "source_text_length": 8038
+  },
+  {
+    "chapter_id": "chapter_086",
+    "chapter_no": 86,
+    "chapter_label": "第八十六回",
+    "title": "受私贿老官翻案牍 寄闲情淑女解琴书",
+    "paragraph_count": 24,
+    "source_text_length": 6717
+  },
+  {
+    "chapter_id": "chapter_087",
+    "chapter_no": 87,
+    "chapter_label": "第八十七回",
+    "title": "感深秋抚琴悲往事 坐禅寂走火入邪魔",
+    "paragraph_count": 33,
+    "source_text_length": 6672
+  },
+  {
+    "chapter_id": "chapter_088",
+    "chapter_no": 88,
+    "chapter_label": "第八十八回",
+    "title": "博庭欢宝玉赞孤儿 正家法贾珍鞭悍仆",
+    "paragraph_count": 21,
+    "source_text_length": 6710
+  },
+  {
+    "chapter_id": "chapter_089",
+    "chapter_no": 89,
+    "chapter_label": "第八十九回",
+    "title": "人亡物在公子填词 蛇影杯弓颦卿绝粒",
+    "paragraph_count": 26,
+    "source_text_length": 6105
+  },
+  {
+    "chapter_id": "chapter_090",
+    "chapter_no": 90,
+    "chapter_label": "第九十回",
+    "title": "失绵衣贫女耐嗷嘈 送果品小郎惊叵测",
+    "paragraph_count": 21,
+    "source_text_length": 6220
+  },
+  {
+    "chapter_id": "chapter_091",
+    "chapter_no": 91,
+    "chapter_label": "第九十一回",
+    "title": "纵淫心宝蟾工设计 布疑阵宝玉妄谈禅",
+    "paragraph_count": 19,
+    "source_text_length": 5429
+  },
+  {
+    "chapter_id": "chapter_092",
+    "chapter_no": 92,
+    "chapter_label": "第九十二回",
+    "title": "评女传巧姐慕贤良 玩母珠贾政参聚散",
+    "paragraph_count": 16,
+    "source_text_length": 7097
+  },
+  {
+    "chapter_id": "chapter_093",
+    "chapter_no": 93,
+    "chapter_label": "第九十三回",
+    "title": "甄家仆投靠贾家门 水月庵掀翻风月案",
+    "paragraph_count": 23,
+    "source_text_length": 6535
+  },
+  {
+    "chapter_id": "chapter_094",
+    "chapter_no": 94,
+    "chapter_label": "第九十四回",
+    "title": "宴海棠贾母赏花妖 失宝玉通灵知奇祸",
+    "paragraph_count": 25,
+    "source_text_length": 8292
+  },
+  {
+    "chapter_id": "chapter_095",
+    "chapter_no": 95,
+    "chapter_label": "第九十五回",
+    "title": "因讹成实元妃薨逝 以假混真宝玉疯颠",
+    "paragraph_count": 20,
+    "source_text_length": 6654
+  },
+  {
+    "chapter_id": "chapter_096",
+    "chapter_no": 96,
+    "chapter_label": "第九十六回",
+    "title": "瞒消息凤姐设奇谋 泄机关颦儿迷本性",
+    "paragraph_count": 17,
+    "source_text_length": 6776
+  },
+  {
+    "chapter_id": "chapter_097",
+    "chapter_no": 97,
+    "chapter_label": "第九十七回",
+    "title": "林黛玉焚稿断痴情 薛宝钗出闺成大礼",
+    "paragraph_count": 30,
+    "source_text_length": 9955
+  },
+  {
+    "chapter_id": "chapter_098",
+    "chapter_no": 98,
+    "chapter_label": "第九十八回",
+    "title": "苦绛珠魂归离恨天 病神瑛泪洒相思地",
+    "paragraph_count": 20,
+    "source_text_length": 5932
+  },
+  {
+    "chapter_id": "chapter_099",
+    "chapter_no": 99,
+    "chapter_label": "第九十九回",
+    "title": "守官箴恶奴同破例? 阅邸报老舅自担惊",
+    "paragraph_count": 18,
+    "source_text_length": 6040
+  },
+  {
+    "chapter_id": "chapter_100",
+    "chapter_no": 100,
+    "chapter_label": "第一百回",
+    "title": "破好事香菱结深恨 悲远嫁宝玉感离情",
+    "paragraph_count": 14,
+    "source_text_length": 5656
+  },
+  {
+    "chapter_id": "chapter_101",
+    "chapter_no": 101,
+    "chapter_label": "第一百一回",
+    "title": "大观园月夜感幽魂 散花寺神签惊异兆",
+    "paragraph_count": 20,
+    "source_text_length": 7988
+  },
+  {
+    "chapter_id": "chapter_102",
+    "chapter_no": 102,
+    "chapter_label": "第一百二回",
+    "title": "宁国府骨肉病灾祲 大观园符水驱妖孽",
+    "paragraph_count": 16,
+    "source_text_length": 4962
+  },
+  {
+    "chapter_id": "chapter_103",
+    "chapter_no": 103,
+    "chapter_label": "第一百三回",
+    "title": "施毒计金桂自焚身 昧真禅雨村空遇旧",
+    "paragraph_count": 16,
+    "source_text_length": 6931
+  },
+  {
+    "chapter_id": "chapter_104",
+    "chapter_no": 104,
+    "chapter_label": "第一百四回",
+    "title": "醉金刚小鳅生大浪 痴公子余痛触前情",
+    "paragraph_count": 16,
+    "source_text_length": 6263
+  },
+  {
+    "chapter_id": "chapter_105",
+    "chapter_no": 105,
+    "chapter_label": "第一百五回",
+    "title": "锦衣军查抄宁国府 骢马使弹劾平安州",
+    "paragraph_count": 16,
+    "source_text_length": 5440
+  },
+  {
+    "chapter_id": "chapter_106",
+    "chapter_no": 106,
+    "chapter_label": "第一百六回",
+    "title": "王熙凤致祸抱羞惭 贾太君祷天消祸患",
+    "paragraph_count": 17,
+    "source_text_length": 5786
+  },
+  {
+    "chapter_id": "chapter_107",
+    "chapter_no": 107,
+    "chapter_label": "第一百七回",
+    "title": "散余资贾母明大义 复世职政老沐天恩",
+    "paragraph_count": 16,
+    "source_text_length": 6295
+  },
+  {
+    "chapter_id": "chapter_108",
+    "chapter_no": 108,
+    "chapter_label": "第一百八回",
+    "title": "强欢笑蘅芜庆生辰 死缠绵潇湘闻鬼哭",
+    "paragraph_count": 15,
+    "source_text_length": 7115
+  },
+  {
+    "chapter_id": "chapter_109",
+    "chapter_no": 109,
+    "chapter_label": "第一百九回",
+    "title": "候芳魂五儿承错爱 还孽债迎女返真元",
+    "paragraph_count": 26,
+    "source_text_length": 9179
+  },
+  {
+    "chapter_id": "chapter_110",
+    "chapter_no": 110,
+    "chapter_label": "第一百十回",
+    "title": "史太君寿终归地府 王凤姐力诎失人心",
+    "paragraph_count": 16,
+    "source_text_length": 6775
+  },
+  {
+    "chapter_id": "chapter_111",
+    "chapter_no": 111,
+    "chapter_label": "第一百十一回",
+    "title": "鸳鸯女殉主登太虚 狗彘奴欺天招伙盗",
+    "paragraph_count": 20,
+    "source_text_length": 7361
+  },
+  {
+    "chapter_id": "chapter_112",
+    "chapter_no": 112,
+    "chapter_label": "第一百十二回",
+    "title": "活冤孽妙尼遭大劫 死雠仇赵妾赴冥曹",
+    "paragraph_count": 23,
+    "source_text_length": 7053
+  },
+  {
+    "chapter_id": "chapter_113",
+    "chapter_no": 113,
+    "chapter_label": "第一百十三回",
+    "title": "忏宿冤凤姐托村妪 释旧憾情婢感痴郎",
+    "paragraph_count": 18,
+    "source_text_length": 7019
+  },
+  {
+    "chapter_id": "chapter_114",
+    "chapter_no": 114,
+    "chapter_label": "第一百十四回",
+    "title": "王熙凤历幻返金陵 甄应嘉蒙恩还玉阙",
+    "paragraph_count": 12,
+    "source_text_length": 4992
+  },
+  {
+    "chapter_id": "chapter_115",
+    "chapter_no": 115,
+    "chapter_label": "第一百十五回",
+    "title": "惑偏私惜春矢素志 证同类宝玉失相知",
+    "paragraph_count": 20,
+    "source_text_length": 7004
+  },
+  {
+    "chapter_id": "chapter_116",
+    "chapter_no": 116,
+    "chapter_label": "第一百十六回",
+    "title": "得通灵幻境悟仙缘 送慈柩故乡全孝道",
+    "paragraph_count": 21,
+    "source_text_length": 6907
+  },
+  {
+    "chapter_id": "chapter_117",
+    "chapter_no": 117,
+    "chapter_label": "第一百十七回",
+    "title": "阻超凡佳人双护玉 欣聚党恶子独承家",
+    "paragraph_count": 18,
+    "source_text_length": 7741
+  },
+  {
+    "chapter_id": "chapter_118",
+    "chapter_no": 118,
+    "chapter_label": "第一百十八回",
+    "title": "记微嫌舅兄欺弱女 惊谜语妻妾谏痴人",
+    "paragraph_count": 25,
+    "source_text_length": 7644
+  },
+  {
+    "chapter_id": "chapter_119",
+    "chapter_no": 119,
+    "chapter_label": "第一百十九回",
+    "title": "中乡魁宝玉却尘缘 沐皇恩贾家延世泽",
+    "paragraph_count": 27,
+    "source_text_length": 9616
+  },
+  {
+    "chapter_id": "chapter_120",
+    "chapter_no": 120,
+    "chapter_label": "第一百二十回",
+    "title": "甄士隐详说太虚情 贾雨村归结红楼梦",
+    "paragraph_count": 27,
+    "source_text_length": 7864
+  }
+]

@@ -1,0 +1,270 @@
+{
+  "status": "warning",
+  "summary": {
+    "recognized_chapter_count": 120,
+    "passage_count": 3028,
+    "error_count": 0,
+    "warning_count": 37
+  },
+  "issues": [
+    {
+      "level": "warning",
+      "code": "SUSPICIOUS_CHAR",
+      "message": "Passage contains suspicious characters: ?",
+      "chapter_id": "chapter_001",
+      "passage_id": "passage_000008"
+    },
+    {
+      "level": "warning",
+      "code": "SUSPICIOUS_CHAR",
+      "message": "Passage contains suspicious characters: ?",
+      "chapter_id": "chapter_005",
+      "passage_id": "passage_000183"
+    },
+    {
+      "level": "warning",
+      "code": "SUSPICIOUS_CHAR",
+      "message": "Passage contains suspicious characters: ?",
+      "chapter_id": "chapter_008",
+      "passage_id": "passage_000244"
+    },
+    {
+      "level": "warning",
+      "code": "SUSPICIOUS_CHAR",
+      "message": "Passage contains suspicious characters: ?",
+      "chapter_id": "chapter_010",
+      "passage_id": "passage_000300"
+    },
+    {
+      "level": "warning",
+      "code": "SUSPICIOUS_CHAR",
+      "message": "Passage contains suspicious characters: ?",
+      "chapter_id": "chapter_044",
+      "passage_id": "passage_001103"
+    },
+    {
+      "level": "warning",
+      "code": "SUSPICIOUS_CHAR",
+      "message": "Passage contains suspicious characters: ?",
+      "chapter_id": "chapter_044",
+      "passage_id": "passage_001104"
+    },
+    {
+      "level": "warning",
+      "code": "SUSPICIOUS_CHAR",
+      "message": "Passage contains suspicious characters: ?",
+      "chapter_id": "chapter_044",
+      "passage_id": "passage_001106"
+    },
+    {
+      "level": "warning",
+      "code": "SUSPICIOUS_CHAR",
+      "message": "Passage contains suspicious characters: ?",
+      "chapter_id": "chapter_045",
+      "passage_id": "passage_001115"
+    },
+    {
+      "level": "warning",
+      "code": "SUSPICIOUS_CHAR",
+      "message": "Passage contains suspicious characters: ?",
+      "chapter_id": "chapter_046",
+      "passage_id": "passage_001133"
+    },
+    {
+      "level": "warning",
+      "code": "SUSPICIOUS_CHAR",
+      "message": "Passage contains suspicious characters: ?",
+      "chapter_id": "chapter_046",
+      "passage_id": "passage_001146"
+    },
+    {
+      "level": "warning",
+      "code": "SUSPICIOUS_CHAR",
+      "message": "Passage contains suspicious characters: ?",
+      "chapter_id": "chapter_053",
+      "passage_id": "passage_001416"
+    },
+    {
+      "level": "warning",
+      "code": "SUSPICIOUS_CHAR",
+      "message": "Passage contains suspicious characters: ?",
+      "chapter_id": "chapter_054",
+      "passage_id": "passage_001434"
+    },
+    {
+      "level": "warning",
+      "code": "SUSPICIOUS_CHAR",
+      "message": "Passage contains suspicious characters: ?",
+      "chapter_id": "chapter_054",
+      "passage_id": "passage_001435"
+    },
+    {
+      "level": "warning",
+      "code": "SUSPICIOUS_CHAR",
+      "message": "Passage contains suspicious characters: ?",
+      "chapter_id": "chapter_054",
+      "passage_id": "passage_001437"
+    },
+    {
+      "level": "warning",
+      "code": "SUSPICIOUS_CHAR",
+      "message": "Passage contains suspicious characters: ?",
+      "chapter_id": "chapter_055",
+      "passage_id": "passage_001446"
+    },
+    {
+      "level": "warning",
+      "code": "SUSPICIOUS_CHAR",
+      "message": "Passage contains suspicious characters: ?",
+      "chapter_id": "chapter_057",
+      "passage_id": "passage_001508"
+    },
+    {
+      "level": "warning",
+      "code": "SUSPICIOUS_CHAR",
+      "message": "Passage contains suspicious characters: ?",
+      "chapter_id": "chapter_058",
+      "passage_id": "passage_001520"
+    },
+    {
+      "level": "warning",
+      "code": "SUSPICIOUS_CHAR",
+      "message": "Passage contains suspicious characters: ?",
+      "chapter_id": "chapter_060",
+      "passage_id": "passage_001577"
+    },
+    {
+      "level": "warning",
+      "code": "SUSPICIOUS_CHAR",
+      "message": "Passage contains suspicious characters: ?",
+      "chapter_id": "chapter_060",
+      "passage_id": "passage_001583"
+    },
+    {
+      "level": "warning",
+      "code": "SUSPICIOUS_CHAR",
+      "message": "Passage contains suspicious characters: ?",
+      "chapter_id": "chapter_061",
+      "passage_id": "passage_001595"
+    },
+    {
+      "level": "warning",
+      "code": "SUSPICIOUS_CHAR",
+      "message": "Passage contains suspicious characters: ?",
+      "chapter_id": "chapter_061",
+      "passage_id": "passage_001601"
+    },
+    {
+      "level": "warning",
+      "code": "SUSPICIOUS_CHAR",
+      "message": "Passage contains suspicious characters: ?",
+      "chapter_id": "chapter_062",
+      "passage_id": "passage_001613"
+    },
+    {
+      "level": "warning",
+      "code": "SUSPICIOUS_CHAR",
+      "message": "Passage contains suspicious characters: ?",
+      "chapter_id": "chapter_062",
+      "passage_id": "passage_001618"
+    },
+    {
+      "level": "warning",
+      "code": "SUSPICIOUS_CHAR",
+      "message": "Passage contains suspicious characters: ?",
+      "chapter_id": "chapter_065",
+      "passage_id": "passage_001748"
+    },
+    {
+      "level": "warning",
+      "code": "SUSPICIOUS_CHAR",
+      "message": "Passage contains suspicious characters: ?",
+      "chapter_id": "chapter_071",
+      "passage_id": "passage_001901"
+    },
+    {
+      "level": "warning",
+      "code": "SUSPICIOUS_CHAR",
+      "message": "Passage contains suspicious characters: ?",
+      "chapter_id": "chapter_081",
+      "passage_id": "passage_002235"
+    },
+    {
+      "level": "warning",
+      "code": "SUSPICIOUS_CHAR",
+      "message": "Passage contains suspicious characters: ?",
+      "chapter_id": "chapter_083",
+      "passage_id": "passage_002266"
+    },
+    {
+      "level": "warning",
+      "code": "SUSPICIOUS_CHAR",
+      "message": "Passage contains suspicious characters: ?",
+      "chapter_id": "chapter_085",
+      "passage_id": "passage_002293"
+    },
+    {
+      "level": "warning",
+      "code": "SUSPICIOUS_CHAR",
+      "message": "Passage contains suspicious characters: ?",
+      "chapter_id": "chapter_087",
+      "passage_id": "passage_002347"
+    },
+    {
+      "level": "warning",
+      "code": "SUSPICIOUS_CHAR",
+      "message": "Passage contains suspicious characters: ?",
+      "chapter_id": "chapter_088",
+      "passage_id": "passage_002384"
+    },
+    {
+      "level": "warning",
+      "code": "SUSPICIOUS_CHAR",
+      "message": "Passage contains suspicious characters: ?",
+      "chapter_id": "chapter_089",
+      "passage_id": "passage_002397"
+    },
+    {
+      "level": "warning",
+      "code": "SUSPICIOUS_CHAR",
+      "message": "Passage contains suspicious characters: ?",
+      "chapter_id": "chapter_094",
+      "passage_id": "passage_002509"
+    },
+    {
+      "level": "warning",
+      "code": "SUSPICIOUS_CHAR",
+      "message": "Passage contains suspicious characters: ?",
+      "chapter_id": "chapter_101",
+      "passage_id": "passage_002657"
+    },
+    {
+      "level": "warning",
+      "code": "SUSPICIOUS_CHAR",
+      "message": "Passage contains suspicious characters: ?",
+      "chapter_id": "chapter_104",
+      "passage_id": "passage_002702"
+    },
+    {
+      "level": "warning",
+      "code": "SUSPICIOUS_CHAR",
+      "message": "Passage contains suspicious characters: ?",
+      "chapter_id": "chapter_108",
+      "passage_id": "passage_002767"
+    },
+    {
+      "level": "warning",
+      "code": "SUSPICIOUS_CHAR",
+      "message": "Passage contains suspicious characters: ?",
+      "chapter_id": "chapter_118",
+      "passage_id": "passage_002955"
+    },
+    {
+      "level": "warning",
+      "code": "SUSPICIOUS_CHAR",
+      "message": "Passage contains suspicious characters: ?",
+      "chapter_id": "chapter_118",
+      "passage_id": "passage_002970"
+    }
+  ]
+}
