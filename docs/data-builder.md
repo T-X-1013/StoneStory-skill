@@ -316,7 +316,7 @@
 
 ## 11. 质量校验建议
 
-当前版本已经实现基础数据构建校验，覆盖以下规则：
+当前版本已经实现 `build_report.json` 驱动的数据构建校验，覆盖以下规则：
 
 - 识别出的章节数必须为 `120`
 - `chapter_no` 必须从 `1` 到 `120` 连续
@@ -327,12 +327,23 @@
 - 每章内 `paragraph_no` 必须连续
 - 可疑字符不得被静默丢弃，应记录命中位置
 
+当前校验器还会读取 `data/input/` 下的参考报告文件，并执行对齐校验：
+
+- `quality_report.json`
+  - 校验参考章节总数是否与当前构建结果一致
+- `chapters_detected.json`
+  - 校验章节数量、`chapter_label` 与 `title` 是否与参考识别结果一致
+- `suspicious_char_report.json`
+  - 校验当前输出中的问号数量、私有区字符数量是否与参考异常报告一致
+  - 将命中的异常字符下沉到 `chapter_label`、`title`、`passage.text` 的字符级位置告警
+
 该报告用于记录：
 
 - chapter 总数
 - passage 总数
 - 错误数
 - 警告数
+- 参考报告中的关键统计值
 - 异常项明细
 
 ## 12. 当前限制
@@ -340,8 +351,7 @@
 当前实现仍有以下限制：
 
 - 依赖上游清洗文本的空行质量
-- 尚未将可疑字符标记回具体 passage
-- 尚未接入 `chapters_detected.json` 做交叉校验
+- 当前可疑字符已下沉到字符级偏移，但尚未映射回原始 txt 的全局字符坐标
 - `source_text_length` 不可直接作为原始字符偏移依据
 - 尚未支持多版本输入文本的构建管理
 
@@ -349,7 +359,7 @@
 
 后续建议按以下顺序扩展：
 
-1. 增加数据构建校验模块与 `build_report.json`
+1. 将字符级告警继续扩展为原始文本全局坐标定位
 2. 为 chapter 增加摘要字段
 3. 为 passage 增加检索辅助字段
 4. 构建 `characters / relations / events / quotes` 数据层

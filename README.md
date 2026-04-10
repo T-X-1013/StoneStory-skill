@@ -1,6 +1,6 @@
 # StoneStory-skill
 
-围绕《红楼梦》构建的开源 skill 项目，当前主实现语言已经切换为 Python。
+围绕《红楼梦》构建的开源 skill 项目。
 
 第一版目标包括：
 
@@ -16,13 +16,22 @@
 - 切分层级：章回、段落
 - 技术方案：Python 标准库实现，轻依赖
 
+当前已完成的人物 skill 第一版生成模块：
+
+- 输入：`triples.csv`、`passages.jsonl`、人物 `manifest.json`
+- 输出：`relations.md`、`evidence_passages.jsonl`、`evidence_ranked.jsonl`、`style_evidence.jsonl`、`source_report.json`
+- 生成原则：先抽取可证实关系和原文证据，不直接写无证据的人物判断
+- 当前包含两层证据处理：角色相关段落去噪、风格证据提炼
+
 ## 目录
 
 - `AGENTS.md`：项目协作约束与交付规范
 - `CURRENT_TASK.md`：当前阶段任务说明
 - `skill/`：技能资产目录，存放知识说明、角色配置、Prompt 等 Markdown / 配置文件
 - `tools/databuilder/`：离线数据构建工具代码
+- `tools/characterskill/`：人物 skill 第一版生成工具代码
 - `docs/data-builder.md`：模块设计说明
+- `docs/character-skill-builder.md`：人物 skill 生成设计说明
 - `data/output/`：默认输出目录
 
 ## 运行方式
@@ -38,6 +47,29 @@ python3 main.py \
   --input data/input/StoneStory.txt \
   --output-dir data/output
 ```
+
+运行人物 skill 第一版生成器：
+
+```bash
+python3 main_character_skill.py
+```
+
+## 测试方式
+
+运行当前回归测试：
+
+```bash
+python3 -m unittest discover -s tests -v
+```
+
+当前测试会覆盖：
+
+- `120` 回与 `3028` 段的构建基线
+- `build_report.json` 的汇总统计
+- 可疑字符字符级告警字段
+- `chapters.json` 与 `passages.jsonl` 的落盘一致性
+- 人物 skill 生成器的关系抽取与证据过滤规则
+- 人物去噪打分与风格证据筛选规则
 
 ## 输出说明
 

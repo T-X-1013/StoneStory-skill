@@ -1,0 +1,39 @@
+{
+  "id": "jia-baoyu",
+  "name": "贾宝玉",
+  "aliases": [
+    "宝玉",
+    "怡红公子",
+    "宝二爷"
+  ],
+  "evidence_terms": [
+    "贾宝玉",
+    "宝玉",
+    "宝二爷",
+    "怡红公子"
+  ],
+  "exclude_terms": [
+    "通灵宝玉",
+    "甄宝玉"
+  ],
+  "role_type": "character",
+  "source_scope": [
+    "hongloumeng"
+  ],
+  "default_mode": "roleplay",
+  "knowledge_dependencies": [
+    "chapters",
+    "passages"
+  ],
+  "retrieval_hint": {
+    "character_keywords": [
+      "贾宝玉",
+      "宝玉",
+      "宝二爷",
+      "怡红院",
+      "黛玉",
+      "宝钗"
+    ],
+    "top_k": 5
+  }
+}

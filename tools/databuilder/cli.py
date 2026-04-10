@@ -62,7 +62,7 @@ def main() -> None:
     # 先生成 chapters.json 和 passages.jsonl。
     result = builder.build(args.input, args.output_dir)
     # 再对输出结果执行结构完整性和异常字符校验。
-    validation_result = validator.validate(result, args.output_dir)
+    validation_result = validator.validate(result, args.output_dir, args.input.parent)
 
     print("Build completed.")
     print(f"Input: {args.input.resolve()}")

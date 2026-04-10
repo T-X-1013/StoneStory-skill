@@ -1,0 +1,36 @@
+{
+  "character_id": "lin-daiyu",
+  "character_name": "林黛玉",
+  "aliases": [
+    "黛玉",
+    "林姑娘",
+    "潇湘妃子"
+  ],
+  "identity_terms": [
+    "潇湘妃子",
+    "林姑娘",
+    "林黛玉",
+    "黛玉"
+  ],
+  "evidence_terms": [
+    "潇湘妃子",
+    "林姑娘",
+    "林黛玉",
+    "黛玉"
+  ],
+  "exclude_terms": [],
+  "relation_count": 6,
+  "evidence_count": 553,
+  "ranked_evidence_count": 553,
+  "style_evidence_count": 231,
+  "relation_label_counts": {
+    "女": 1,
+    "丫鬟": 4,
+    "乳母": 1
+  },
+  "source_files": {
+    "triples_csv": "data/input/triples.csv",
+    "passages_jsonl": "data/output/passages.jsonl",
+    "manifest_json": "skill/characters/lin-daiyu.skill/manifest.json"
+  }
+}

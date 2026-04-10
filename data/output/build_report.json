@@ -4,267 +4,441 @@
     "recognized_chapter_count": 120,
     "passage_count": 3028,
     "error_count": 0,
-    "warning_count": 37
+    "warning_count": 39,
+    "reference_chapter_count": 120,
+    "current_question_mark_count": 39,
+    "reference_question_mark_count": 39,
+    "current_private_use_count": 0,
+    "reference_removed_private_use_count": 1
   },
   "issues": [
     {
       "level": "warning",
       "code": "SUSPICIOUS_CHAR",
-      "message": "Passage contains suspicious characters: ?",
+      "message": "Suspicious character '?' found in title at offset 8.",
+      "chapter_id": "chapter_099",
+      "source_field": "title",
+      "text_offset": 8,
+      "suspicious_char": "?",
+      "context": "守官箴恶奴同破例? 阅邸报老舅自担惊"
+    },
+    {
+      "level": "warning",
+      "code": "SUSPICIOUS_CHAR",
+      "message": "Suspicious character '?' found in text at offset 202.",
       "chapter_id": "chapter_001",
-      "passage_id": "passage_000008"
+      "passage_id": "passage_000008",
+      "source_field": "text",
+      "text_offset": 202,
+      "suspicious_char": "?",
+      "context": "，改《石头记》为《情僧录》。至?玉峰题曰《红楼梦》。东鲁孔梅溪"
     },
     {
       "level": "warning",
       "code": "SUSPICIOUS_CHAR",
-      "message": "Passage contains suspicious characters: ?",
+      "message": "Suspicious character '?' found in text at offset 3.",
       "chapter_id": "chapter_005",
-      "passage_id": "passage_000183"
+      "passage_id": "passage_000183",
+      "source_field": "text",
+      "text_offset": 3,
+      "suspicious_char": "?",
+      "context": "〔收尾?飞鸟各投林〕为官的，家业凋零；"
     },
     {
       "level": "warning",
       "code": "SUSPICIOUS_CHAR",
-      "message": "Passage contains suspicious characters: ?",
+      "message": "Suspicious character '?' found in text at offset 25.",
       "chapter_id": "chapter_008",
-      "passage_id": "passage_000244"
+      "passage_id": "passage_000244",
+      "source_field": "text",
+      "text_offset": 25,
+      "suspicious_char": "?",
+      "context": "，那堪翠斝贮琼浆。莫言绮縠无风?，试看金娃对玉郎。"
     },
     {
       "level": "warning",
       "code": "SUSPICIOUS_CHAR",
-      "message": "Passage contains suspicious characters: ?",
+      "message": "Suspicious character '?' found in text at offset 44.",
       "chapter_id": "chapter_010",
-      "passage_id": "passage_000300"
+      "passage_id": "passage_000300",
+      "source_field": "text",
+      "text_offset": 44,
+      "suspicious_char": "?",
+      "context": "洗。白芍二钱，炒。川芎钱半。黄?三钱。香附米二钱，制醋柴胡八分"
     },
     {
       "level": "warning",
       "code": "SUSPICIOUS_CHAR",
-      "message": "Passage contains suspicious characters: ?",
+      "message": "Suspicious character '?' found in text at offset 113.",
       "chapter_id": "chapter_044",
-      "passage_id": "passage_001103"
+      "passage_id": "passage_001103",
+      "source_field": "text",
+      "text_offset": 113,
+      "suspicious_char": "?",
+      "context": "儿。贾琏见了平儿，越发顾不得了?，所谓“妻不如妾，妾不如偷”，"
     },
     {
       "level": "warning",
       "code": "SUSPICIOUS_CHAR",
-      "message": "Passage contains suspicious characters: ?",
+      "message": "Suspicious character '?' found in text at offset 64.",
       "chapter_id": "chapter_044",
-      "passage_id": "passage_001104"
+      "passage_id": "passage_001104",
+      "source_field": "text",
+      "text_offset": 64,
+      "suspicious_char": "?",
+      "context": "姐儿正自愧悔昨日酒吃多了，不念?素日之情，浮躁起来，为听了旁人"
     },
     {
       "level": "warning",
       "code": "SUSPICIOUS_CHAR",
-      "message": "Passage contains suspicious characters: ?",
+      "message": "Suspicious character '?' found in text at offset 129.",
       "chapter_id": "chapter_044",
-      "passage_id": "passage_001106"
+      "passage_id": "passage_001106",
+      "source_field": "text",
+      "text_offset": 129,
+      "suspicious_char": "?",
+      "context": "我正想要打官司呢！”林之孝家的?道：“我才和众人劝他们一回，又"
     },
     {
       "level": "warning",
       "code": "SUSPICIOUS_CHAR",
-      "message": "Passage contains suspicious characters: ?",
+      "message": "Suspicious character '?' found in text at offset 117.",
       "chapter_id": "chapter_045",
-      "passage_id": "passage_001115"
+      "passage_id": "passage_001115",
+      "source_field": "text",
+      "text_offset": 117,
+      "suspicious_char": "?",
+      "context": "孩子们淘气；不知道的，人家就说?仗着财势欺人，连主子的名声也不"
     },
     {
       "level": "warning",
       "code": "SUSPICIOUS_CHAR",
-      "message": "Passage contains suspicious characters: ?",
+      "message": "Suspicious character '?' found in text at offset 281.",
       "chapter_id": "chapter_046",
-      "passage_id": "passage_001133"
+      "passage_id": "passage_001133",
+      "source_field": "text",
+      "text_offset": 281,
+      "suspicious_char": "?",
+      "context": "爱的东西赏他。如今老太太待老爷?，自然也是那样了。依我说，老太"
     },
     {
       "level": "warning",
       "code": "SUSPICIOUS_CHAR",
-      "message": "Passage contains suspicious characters: ?",
+      "message": "Suspicious character '?' found in text at offset 85.",
       "chapter_id": "chapter_046",
-      "passage_id": "passage_001146"
+      "passage_id": "passage_001146",
+      "source_field": "text",
+      "text_offset": 85,
+      "suspicious_char": "?",
+      "context": "南京信来，金彩已经得了痰迷心窍?，那边连棺材银子都赏了，不知如"
     },
     {
       "level": "warning",
       "code": "SUSPICIOUS_CHAR",
-      "message": "Passage contains suspicious characters: ?",
+      "message": "Suspicious character '?' found in text at offset 8.",
       "chapter_id": "chapter_053",
-      "passage_id": "passage_001416"
+      "passage_id": "passage_001416",
+      "source_field": "text",
+      "text_offset": 8,
+      "suspicious_char": "?",
+      "context": "此时，正唱《西楼?楼会》这出将终，于叔夜因赌气去"
     },
     {
       "level": "warning",
       "code": "SUSPICIOUS_CHAR",
-      "message": "Passage contains suspicious characters: ?",
+      "message": "Suspicious character '?' found in text at offset 31.",
       "chapter_id": "chapter_054",
-      "passage_id": "passage_001434"
+      "passage_id": "passage_001434",
+      "source_field": "text",
+      "text_offset": 31,
+      "suspicious_char": "?",
+      "context": "二个人，从游廊角门出来。婆子们?抱着几个软包，因不及抬箱，估量"
     },
     {
       "level": "warning",
       "code": "SUSPICIOUS_CHAR",
-      "message": "Passage contains suspicious characters: ?",
+      "message": "Suspicious character '?' found in text at offset 268.",
       "chapter_id": "chapter_054",
-      "passage_id": "passage_001435"
+      "passage_id": "passage_001434",
+      "source_field": "text",
+      "text_offset": 268,
+      "suspicious_char": "?",
+      "context": "只只需用管萧合，笙、笛一概不用?。”文官笑道：“这也是的，我们"
     },
     {
       "level": "warning",
       "code": "SUSPICIOUS_CHAR",
-      "message": "Passage contains suspicious characters: ?",
+      "message": "Suspicious character '?' found in text at offset 80.",
       "chapter_id": "chapter_054",
-      "passage_id": "passage_001437"
+      "passage_id": "passage_001435",
+      "source_field": "text",
+      "text_offset": 80,
+      "suspicious_char": "?",
+      "context": "母道：“也有，只是像方才《西楼?楚江情》一支，多有小生吹萧合的"
     },
     {
       "level": "warning",
       "code": "SUSPICIOUS_CHAR",
-      "message": "Passage contains suspicious characters: ?",
+      "message": "Suspicious character '?' found in text at offset 634.",
+      "chapter_id": "chapter_054",
+      "passage_id": "passage_001437",
+      "source_field": "text",
+      "text_offset": 634,
+      "suspicious_char": "?",
+      "context": "这却不难。那日你们妯娌十个托生?时，可巧我到阎王那里去的，因为"
+    },
+    {
+      "level": "warning",
+      "code": "SUSPICIOUS_CHAR",
+      "message": "Suspicious character '?' found in text at offset 202.",
       "chapter_id": "chapter_055",
-      "passage_id": "passage_001446"
+      "passage_id": "passage_001446",
+      "source_field": "text",
+      "text_offset": 202,
+      "suspicious_char": "?",
+      "context": "坐。这厅上也有一匾，题着“辅仁?谕德”四字，家下俗呼皆只叫“议"
     },
     {
       "level": "warning",
       "code": "SUSPICIOUS_CHAR",
-      "message": "Passage contains suspicious characters: ?",
+      "message": "Suspicious character '?' found in text at offset 197.",
       "chapter_id": "chapter_057",
-      "passage_id": "passage_001508"
+      "passage_id": "passage_001508",
+      "source_field": "text",
+      "text_offset": 197,
+      "suspicious_char": "?",
+      "context": "。”说着，便命人去叫过尤氏婆媳?二人来。贾母告诉她原故，彼此忙"
     },
     {
       "level": "warning",
       "code": "SUSPICIOUS_CHAR",
-      "message": "Passage contains suspicious characters: ?",
+      "message": "Suspicious character '?' found in text at offset 56.",
       "chapter_id": "chapter_058",
-      "passage_id": "passage_001520"
+      "passage_id": "passage_001520",
+      "source_field": "text",
+      "text_offset": 56,
+      "suspicious_char": "?",
+      "context": "一年内不得筵宴音乐，庶民皆三月?不得婚嫁。贾母、邢、王、尤、许"
     },
     {
       "level": "warning",
       "code": "SUSPICIOUS_CHAR",
-      "message": "Passage contains suspicious characters: ?",
+      "message": "Suspicious character '?' found in text at offset 290.",
       "chapter_id": "chapter_060",
-      "passage_id": "passage_001577"
+      "passage_id": "passage_001577",
+      "source_field": "text",
+      "text_offset": 290,
+      "suspicious_char": "?",
+      "context": "将方才之话告诉与夏婆子。夏婆子?听了，又气又怕，便欲去艾官问她"
     },
     {
       "level": "warning",
       "code": "SUSPICIOUS_CHAR",
-      "message": "Passage contains suspicious characters: ?",
+      "message": "Suspicious character '?' found in text at offset 92.",
       "chapter_id": "chapter_060",
-      "passage_id": "passage_001583"
+      "passage_id": "passage_001583",
+      "source_field": "text",
+      "text_offset": 92,
+      "suspicious_char": "?",
+      "context": "要了去，还没给人来，一个是坠儿?的，也还没补。如今要你一个也不"
     },
     {
       "level": "warning",
       "code": "SUSPICIOUS_CHAR",
-      "message": "Passage contains suspicious characters: ?",
+      "message": "Suspicious character '?' found in text at offset 44.",
       "chapter_id": "chapter_061",
-      "passage_id": "passage_001595"
+      "passage_id": "passage_001595",
+      "source_field": "text",
+      "text_offset": 44,
+      "suspicious_char": "?",
+      "context": "不及，只得上来问好。林之孝家的?问道：“我听见你病了，怎么跑到"
     },
     {
       "level": "warning",
       "code": "SUSPICIOUS_CHAR",
-      "message": "Passage contains suspicious characters: ?",
+      "message": "Suspicious character '?' found in text at offset 175.",
       "chapter_id": "chapter_061",
-      "passage_id": "passage_001601"
+      "passage_id": "passage_001601",
+      "source_field": "text",
+      "text_offset": 175,
+      "suspicious_char": "?",
+      "context": "应了，大家无事。如今反要问你们?两个，还是怎样？若从此以后大家"
     },
     {
       "level": "warning",
       "code": "SUSPICIOUS_CHAR",
-      "message": "Passage contains suspicious characters: ?",
+      "message": "Suspicious character '?' found in text at offset 277.",
       "chapter_id": "chapter_062",
-      "passage_id": "passage_001613"
+      "passage_id": "passage_001613",
+      "source_field": "text",
+      "text_offset": 277,
+      "suspicious_char": "?",
+      "context": "”宝玉听了，喜得忙作下揖去，说?︰“原来今儿也是姐姐的芳诞。”"
     },
     {
       "level": "warning",
       "code": "SUSPICIOUS_CHAR",
-      "message": "Passage contains suspicious characters: ?",
+      "message": "Suspicious character '?' found in text at offset 213.",
       "chapter_id": "chapter_062",
-      "passage_id": "passage_001618"
+      "passage_id": "passage_001618",
+      "source_field": "text",
+      "text_offset": 213,
+      "suspicious_char": "?",
+      "context": "姐姐也知道我们那边近日丢了东西?？”宝钗笑道：“你只知道玫瑰露"
     },
     {
       "level": "warning",
       "code": "SUSPICIOUS_CHAR",
-      "message": "Passage contains suspicious characters: ?",
+      "message": "Suspicious character '?' found in text at offset 121.",
       "chapter_id": "chapter_065",
-      "passage_id": "passage_001748"
+      "passage_id": "passage_001748",
+      "source_field": "text",
+      "text_offset": 121,
+      "suspicious_char": "?",
+      "context": "备下酒馔，关起门来，都是一家人?，原无避讳。那鲍二来请安，贾珍"
     },
     {
       "level": "warning",
       "code": "SUSPICIOUS_CHAR",
-      "message": "Passage contains suspicious characters: ?",
+      "message": "Suspicious character '?' found in text at offset 171.",
       "chapter_id": "chapter_071",
-      "passage_id": "passage_001901"
+      "passage_id": "passage_001901",
+      "source_field": "text",
+      "text_offset": 171,
+      "suspicious_char": "?",
+      "context": "忙劝说：“没有的事，必是这一个?听错了。”两个姑子笑推这丫头道"
     },
     {
       "level": "warning",
       "code": "SUSPICIOUS_CHAR",
-      "message": "Passage contains suspicious characters: ?",
+      "message": "Suspicious character '?' found in text at offset 204.",
       "chapter_id": "chapter_081",
-      "passage_id": "passage_002235"
+      "passage_id": "passage_002235",
+      "source_field": "text",
+      "text_offset": 204,
+      "suspicious_char": "?",
+      "context": "下时，不免四面一看。见昔时金荣?辈不见了几个，又添了几个小学生"
     },
     {
       "level": "warning",
       "code": "SUSPICIOUS_CHAR",
-      "message": "Passage contains suspicious characters: ?",
+      "message": "Suspicious character '?' found in text at offset 214.",
       "chapter_id": "chapter_083",
-      "passage_id": "passage_002266"
+      "passage_id": "passage_002266",
+      "source_field": "text",
+      "text_offset": 214,
+      "suspicious_char": "?",
+      "context": "着步行。走至元妃寝宫，只见奎壁?辉煌，琉璃照耀。又有两个小宫女"
     },
     {
       "level": "warning",
       "code": "SUSPICIOUS_CHAR",
-      "message": "Passage contains suspicious characters: ?",
+      "message": "Suspicious character '?' found in text at offset 247.",
       "chapter_id": "chapter_085",
-      "passage_id": "passage_002293"
+      "passage_id": "passage_002293",
+      "source_field": "text",
+      "text_offset": 247,
+      "suspicious_char": "?",
+      "context": "”说着，呈上谢宴并请午安的帖子?来。北静王略看了一看，仍递给小"
     },
     {
       "level": "warning",
       "code": "SUSPICIOUS_CHAR",
-      "message": "Passage contains suspicious characters: ?",
+      "message": "Suspicious character '?' found in text at offset 35.",
       "chapter_id": "chapter_087",
-      "passage_id": "passage_002347"
+      "passage_id": "passage_002347",
+      "source_field": "text",
+      "text_offset": 35,
+      "suspicious_char": "?",
+      "context": "别人，单寄与我，也是惺惺惜惺惺?的意思。”正在沉吟，只听见外面"
     },
     {
       "level": "warning",
       "code": "SUSPICIOUS_CHAR",
-      "message": "Passage contains suspicious characters: ?",
+      "message": "Suspicious character '?' found in text at offset 101.",
       "chapter_id": "chapter_088",
-      "passage_id": "passage_002384"
+      "passage_id": "passage_002384",
+      "source_field": "text",
+      "text_offset": 101,
+      "suspicious_char": "?",
+      "context": "爷、二爷都生了气，在外头打人呢?。”凤姐听了，不知何故，正要叫"
     },
     {
       "level": "warning",
       "code": "SUSPICIOUS_CHAR",
-      "message": "Passage contains suspicious characters: ?",
+      "message": "Suspicious character '?' found in text at offset 27.",
       "chapter_id": "chapter_089",
-      "passage_id": "passage_002397"
+      "passage_id": "passage_002397",
+      "source_field": "text",
+      "text_offset": 27,
+      "suspicious_char": "?",
+      "context": "来，要往学房中去。这日天气陡寒?，只见袭人早已打点出一包衣服，"
     },
     {
       "level": "warning",
       "code": "SUSPICIOUS_CHAR",
-      "message": "Passage contains suspicious characters: ?",
+      "message": "Suspicious character '?' found in text at offset 31.",
       "chapter_id": "chapter_094",
-      "passage_id": "passage_002509"
+      "passage_id": "passage_002509",
+      "source_field": "text",
+      "text_offset": 31,
+      "suspicious_char": "?",
+      "context": "应是北堂增寿考，一阳旋复占先梅?。"
     },
     {
       "level": "warning",
       "code": "SUSPICIOUS_CHAR",
-      "message": "Passage contains suspicious characters: ?",
+      "message": "Suspicious character '?' found in text at offset 52.",
       "chapter_id": "chapter_101",
-      "passage_id": "passage_002657"
+      "passage_id": "passage_002657",
+      "source_field": "text",
+      "text_offset": 52,
+      "suspicious_char": "?",
+      "context": "身向宝钗笑道：“我和你向老太太?屋里去罢。”笑着出了房门，一同"
     },
     {
       "level": "warning",
       "code": "SUSPICIOUS_CHAR",
-      "message": "Passage contains suspicious characters: ?",
+      "message": "Suspicious character '?' found in text at offset 379.",
       "chapter_id": "chapter_104",
-      "passage_id": "passage_002702"
+      "passage_id": "passage_002702",
+      "source_field": "text",
+      "text_offset": 379,
+      "suspicious_char": "?",
+      "context": "小民，怎样强娶有男妇女，叫他们?吵嚷出来，有了风声到了都老爷耳"
     },
     {
       "level": "warning",
       "code": "SUSPICIOUS_CHAR",
-      "message": "Passage contains suspicious characters: ?",
+      "message": "Suspicious character '?' found in text at offset 560.",
       "chapter_id": "chapter_108",
-      "passage_id": "passage_002767"
+      "passage_id": "passage_002767",
+      "source_field": "text",
+      "text_offset": 560,
+      "suspicious_char": "?",
+      "context": "手儿便是李纨，说道：“寻得桃源?好避秦。”大家又喝了一口。骰盆"
     },
     {
       "level": "warning",
       "code": "SUSPICIOUS_CHAR",
-      "message": "Passage contains suspicious characters: ?",
+      "message": "Suspicious character '?' found in text at offset 124.",
       "chapter_id": "chapter_118",
-      "passage_id": "passage_002955"
+      "passage_id": "passage_002955",
+      "source_field": "text",
+      "text_offset": 124,
+      "suspicious_char": "?",
+      "context": "不得已，写书一封，差人到赖尚荣?任上借银五百，叫人沿途迎上来，"
     },
     {
       "level": "warning",
       "code": "SUSPICIOUS_CHAR",
-      "message": "Passage contains suspicious characters: ?",
+      "message": "Suspicious character '?' found in text at offset 198.",
       "chapter_id": "chapter_118",
-      "passage_id": "passage_002970"
+      "passage_id": "passage_002970",
+      "source_field": "text",
+      "text_offset": 198,
+      "suspicious_char": "?",
+      "context": "，叫咱们好生念书了？叔叔这一程?子只怕总没作文章罢？”宝玉笑道"
     }
   ]
 }

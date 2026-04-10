@@ -1,0 +1,36 @@
+{
+  "id": "lin-daiyu",
+  "name": "林黛玉",
+  "aliases": [
+    "黛玉",
+    "林姑娘",
+    "潇湘妃子"
+  ],
+  "evidence_terms": [
+    "林黛玉",
+    "黛玉",
+    "林姑娘",
+    "潇湘妃子"
+  ],
+  "exclude_terms": [],
+  "role_type": "character",
+  "source_scope": [
+    "hongloumeng"
+  ],
+  "default_mode": "roleplay",
+  "knowledge_dependencies": [
+    "chapters",
+    "passages"
+  ],
+  "retrieval_hint": {
+    "character_keywords": [
+      "林黛玉",
+      "黛玉",
+      "林姑娘",
+      "潇湘馆",
+      "葬花",
+      "宝玉"
+    ],
+    "top_k": 5
+  }
+}

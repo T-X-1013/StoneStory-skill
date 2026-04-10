@@ -30,18 +30,22 @@ class BuildValidator:
     # 已知《红楼梦》清洗版应识别出 120 回。
     EXPECTED_CHAPTER_COUNT = 120
 
-    def validate(self, build_result: BuildResult, output_dir: Path) -> ValidationResult:
+    def validate(self, build_result: BuildResult, output_dir: Path, input_dir: Path | None = None) -> ValidationResult:
         """
         执行全部校验规则，并把结果写成校验报告。
 
         @params:
             build_result: 已生成的章节与段落构建结果。
             output_dir: 校验报告输出目录。
+            input_dir: 输入目录；若存在参考报告文件，会一并参与校验。
 
         @return:
             ValidationResult 对象，包含状态、汇总、问题列表和报告路径。
         """
         issues: list[ValidationIssue] = []
+        reference_quality_report = self.load_json(input_dir / "quality_report.json") if input_dir else None
+        reference_chapters = self.load_json(input_dir / "chapters_detected.json") if input_dir else None
+        reference_suspicious_report = self.load_json(input_dir / "suspicious_char_report.json") if input_dir else None
 
         self.validate_chapter_count(build_result, issues)
         self.validate_chapter_sequence(build_result, issues)
@@ -51,6 +55,15 @@ class BuildValidator:
         self.validate_passage_text(build_result, issues)
         self.validate_paragraph_sequence(build_result, issues)
         self.validate_suspicious_characters(build_result, issues)
+        self.validate_quality_report_alignment(build_result, reference_quality_report, issues)
+        self.validate_chapter_reference_alignment(build_result, reference_chapters, issues)
+        question_mark_count, private_use_count = self.count_suspicious_characters_in_outputs(build_result)
+        self.validate_suspicious_report_alignment(
+            question_mark_count,
+            private_use_count,
+            reference_suspicious_report,
+            issues,
+        )
 
         error_count = sum(1 for issue in issues if issue.level == "error")
         warning_count = sum(1 for issue in issues if issue.level == "warning")
@@ -61,6 +74,11 @@ class BuildValidator:
             passage_count=len(build_result.passages),
             error_count=error_count,
             warning_count=warning_count,
+            reference_chapter_count=self.read_reference_chapter_count(reference_quality_report),
+            current_question_mark_count=question_mark_count,
+            reference_question_mark_count=self.read_reference_question_mark_count(reference_suspicious_report),
+            current_private_use_count=private_use_count,
+            reference_removed_private_use_count=self.read_reference_private_use_count(reference_suspicious_report),
         )
 
         output_dir.mkdir(parents=True, exist_ok=True)
@@ -85,6 +103,20 @@ class BuildValidator:
             issues=issues,
             report_output=report_output,
         )
+
+    def load_json(self, file_path: Path) -> dict | list | None:
+        """
+        读取一份 JSON 参考文件；文件不存在时返回 None。
+
+        @params:
+            file_path: 待读取的 JSON 文件路径。
+
+        @return:
+            解析后的 JSON 数据；若文件不存在则返回 None。
+        """
+        if not file_path.exists():
+            return None
+        return json.loads(file_path.read_text(encoding="utf-8"))
 
     def validate_chapter_count(self, build_result: BuildResult, issues: list[ValidationIssue]) -> None:
         """
@@ -268,7 +300,7 @@ class BuildValidator:
 
     def validate_suspicious_characters(self, build_result: BuildResult, issues: list[ValidationIssue]) -> None:
         """
-        检查文本中是否存在可疑字符，并按 passage 维度记录告警。
+        检查文本中是否存在可疑字符，并按字符位置记录告警。
 
         @params:
             build_result: 已生成的章节与段落构建结果。
@@ -277,36 +309,276 @@ class BuildValidator:
         @return:
             None。
         """
-        for passage in build_result.passages:
-            suspicious = self.find_suspicious_characters(passage.text)
-            if not suspicious:
-                continue
+        for chapter in build_result.chapters:
+            self.append_suspicious_character_issues(
+                text=chapter.chapter_label,
+                chapter_id=chapter.chapter_id,
+                passage_id=None,
+                source_field="chapter_label",
+                issues=issues,
+            )
+            self.append_suspicious_character_issues(
+                text=chapter.title,
+                chapter_id=chapter.chapter_id,
+                passage_id=None,
+                source_field="title",
+                issues=issues,
+            )
 
+        for passage in build_result.passages:
+            self.append_suspicious_character_issues(
+                text=passage.text,
+                chapter_id=passage.chapter_id,
+                passage_id=passage.passage_id,
+                source_field="text",
+                issues=issues,
+            )
+
+    def append_suspicious_character_issues(
+        self,
+        text: str,
+        chapter_id: str | None,
+        passage_id: str | None,
+        source_field: str,
+        issues: list[ValidationIssue],
+    ) -> None:
+        """
+        扫描一段文本中的异常字符，并将每次命中写成独立告警。
+
+        @params:
+            text: 待扫描文本。
+            chapter_id: 关联章节 ID；若无则为空。
+            passage_id: 关联段落 ID；若无则为空。
+            source_field: 命中来源字段名。
+            issues: 校验问题集合，用于追加写入问题。
+
+        @return:
+            None。
+        """
+        for offset, ch in self.find_suspicious_occurrences(text):
             issues.append(
                 ValidationIssue(
                     level="warning",
                     code="SUSPICIOUS_CHAR",
-                    message=f"Passage contains suspicious characters: {', '.join(suspicious)}",
-                    chapter_id=passage.chapter_id,
-                    passage_id=passage.passage_id,
+                    message=f"Suspicious character {repr(ch)} found in {source_field} at offset {offset}.",
+                    chapter_id=chapter_id,
+                    passage_id=passage_id,
+                    source_field=source_field,
+                    text_offset=offset,
+                    suspicious_char=ch,
+                    context=self.extract_context(text, offset),
                 )
             )
 
-    def find_suspicious_characters(self, text: str) -> list[str]:
+    def validate_quality_report_alignment(
+        self,
+        build_result: BuildResult,
+        reference_quality_report: dict | list | None,
+        issues: list[ValidationIssue],
+    ) -> None:
         """
-        返回一段文本中命中的可疑字符列表。
+        检查当前构建结果是否与 quality_report.json 一致。
+
+        @params:
+            build_result: 已生成的章节与段落构建结果。
+            reference_quality_report: 参考质量报告内容。
+            issues: 校验问题集合，用于追加写入问题。
+
+        @return:
+            None。
+        """
+        if not isinstance(reference_quality_report, dict):
+            return
+
+        reference_count = reference_quality_report.get("recognized_chapter_count")
+        if isinstance(reference_count, int) and reference_count != len(build_result.chapters):
+            issues.append(
+                ValidationIssue(
+                    level="error",
+                    code="QUALITY_REPORT_COUNT_MISMATCH",
+                    message=f"quality_report.json expects {reference_count} chapters, current build has {len(build_result.chapters)}.",
+                )
+            )
+
+        missing_chapters = reference_quality_report.get("missing_chapters", [])
+        if missing_chapters:
+            issues.append(
+                ValidationIssue(
+                    level="error",
+                    code="QUALITY_REPORT_MISSING_CHAPTERS",
+                    message=f"quality_report.json reports missing chapters: {missing_chapters}.",
+                )
+            )
+
+        duplicate_chapters = reference_quality_report.get("duplicate_chapters", [])
+        if duplicate_chapters:
+            issues.append(
+                ValidationIssue(
+                    level="error",
+                    code="QUALITY_REPORT_DUPLICATE_CHAPTERS",
+                    message=f"quality_report.json reports duplicate chapters: {duplicate_chapters}.",
+                )
+            )
+
+    def validate_chapter_reference_alignment(
+        self,
+        build_result: BuildResult,
+        reference_chapters: dict | list | None,
+        issues: list[ValidationIssue],
+    ) -> None:
+        """
+        检查当前识别出的章节标题是否与 chapters_detected.json 一致。
+
+        @params:
+            build_result: 已生成的章节与段落构建结果。
+            reference_chapters: 参考章节识别结果。
+            issues: 校验问题集合，用于追加写入问题。
+
+        @return:
+            None。
+        """
+        if not isinstance(reference_chapters, list):
+            return
+
+        if len(reference_chapters) != len(build_result.chapters):
+            issues.append(
+                ValidationIssue(
+                    level="error",
+                    code="CHAPTER_REFERENCE_COUNT_MISMATCH",
+                    message=f"chapters_detected.json contains {len(reference_chapters)} chapters, current build has {len(build_result.chapters)}.",
+                )
+            )
+            return
+
+        for chapter, reference in zip(build_result.chapters, reference_chapters):
+            reference_label = reference.get("chapter_label")
+            reference_title = reference.get("title")
+
+            if reference_label != chapter.chapter_label:
+                issues.append(
+                    ValidationIssue(
+                        level="error",
+                        code="CHAPTER_LABEL_MISMATCH",
+                        message=f"Reference chapter_label={reference_label}, current={chapter.chapter_label}.",
+                        chapter_id=chapter.chapter_id,
+                    )
+                )
+
+            if reference_title != chapter.title:
+                issues.append(
+                    ValidationIssue(
+                        level="error",
+                        code="CHAPTER_TITLE_MISMATCH",
+                        message=f"Reference title={reference_title}, current={chapter.title}.",
+                        chapter_id=chapter.chapter_id,
+                    )
+                )
+
+    def count_suspicious_characters_in_outputs(self, build_result: BuildResult) -> tuple[int, int]:
+        """
+        统计当前结构化结果中的问号和私有区字符数量。
+
+        @params:
+            build_result: 已生成的章节与段落构建结果。
+
+        @return:
+            二元组：(问号总数, 私有区字符总数)。
+        """
+        question_mark_count = 0
+        private_use_count = 0
+
+        for chapter in build_result.chapters:
+            question_mark_count += chapter.chapter_label.count("?")
+            question_mark_count += chapter.title.count("?")
+            private_use_count += self.count_private_use_characters(chapter.chapter_label)
+            private_use_count += self.count_private_use_characters(chapter.title)
+
+        for passage in build_result.passages:
+            question_mark_count += passage.text.count("?")
+            private_use_count += self.count_private_use_characters(passage.text)
+
+        return question_mark_count, private_use_count
+
+    def count_private_use_characters(self, text: str) -> int:
+        """
+        统计文本中的私有区字符数量。
+
+        @params:
+            text: 待统计文本。
+
+        @return:
+            私有区字符数量。
+        """
+        return sum(1 for ch in text if unicodedata.category(ch) == "Co")
+
+    def validate_suspicious_report_alignment(
+        self,
+        question_mark_count: int,
+        private_use_count: int,
+        reference_suspicious_report: dict | list | None,
+        issues: list[ValidationIssue],
+    ) -> None:
+        """
+        检查当前异常字符统计是否与 suspicious_char_report.json 一致。
+
+        @params:
+            question_mark_count: 当前结构化结果中的问号总数。
+            private_use_count: 当前结构化结果中的私有区字符总数。
+            reference_suspicious_report: 参考异常字符报告内容。
+            issues: 校验问题集合，用于追加写入问题。
+
+        @return:
+            None。
+        """
+        if not isinstance(reference_suspicious_report, dict):
+            return
+
+        reference_question_marks = reference_suspicious_report.get("total_question_marks")
+        if isinstance(reference_question_marks, int) and reference_question_marks != question_mark_count:
+            issues.append(
+                ValidationIssue(
+                    level="warning",
+                    code="QUESTION_MARK_COUNT_MISMATCH",
+                    message=f"suspicious_char_report.json expects {reference_question_marks} question marks, current structured outputs contain {question_mark_count}.",
+                )
+            )
+
+        if private_use_count > 0:
+            issues.append(
+                ValidationIssue(
+                    level="warning",
+                    code="PRIVATE_USE_CHAR_REMAINING",
+                    message=f"Structured outputs still contain {private_use_count} private-use characters.",
+                )
+            )
+
+    def find_suspicious_occurrences(self, text: str) -> list[tuple[int, str]]:
+        """
+        返回一段文本中命中的可疑字符及其字符偏移。
 
         @params:
             text: 待检查的正文文本。
 
         @return:
-            命中的可疑字符列表，去重后返回。
+            命中的可疑字符位置列表，每项为 (字符偏移, 字符本身)。
         """
-        found: list[str] = []
-        for ch in text:
-            if self.is_suspicious_character(ch) and ch not in found:
-                found.append(ch)
-        return found
+        return [(index, ch) for index, ch in enumerate(text) if self.is_suspicious_character(ch)]
+
+    def extract_context(self, text: str, offset: int, radius: int = 15) -> str:
+        """
+        提取命中位置附近的上下文片段，便于人工核对。
+
+        @params:
+            text: 原始文本。
+            offset: 命中的字符偏移。
+            radius: 命中位置两侧保留的字符数。
+
+        @return:
+            截取后的上下文片段。
+        """
+        start = max(0, offset - radius)
+        end = min(len(text), offset + radius + 1)
+        return text[start:end]
 
     @staticmethod
     def is_suspicious_character(ch: str) -> bool:
@@ -322,3 +594,48 @@ class BuildValidator:
         if ch in {"?", "\ufffd"}:
             return True
         return unicodedata.category(ch) == "Co"
+
+    def read_reference_chapter_count(self, reference_quality_report: dict | list | None) -> int | None:
+        """
+        从参考质量报告中读取章节数。
+
+        @params:
+            reference_quality_report: 参考质量报告内容。
+
+        @return:
+            参考章节数；若不可用则返回 None。
+        """
+        if not isinstance(reference_quality_report, dict):
+            return None
+        value = reference_quality_report.get("recognized_chapter_count")
+        return value if isinstance(value, int) else None
+
+    def read_reference_question_mark_count(self, reference_suspicious_report: dict | list | None) -> int | None:
+        """
+        从参考异常报告中读取问号总数。
+
+        @params:
+            reference_suspicious_report: 参考异常字符报告内容。
+
+        @return:
+            参考问号总数；若不可用则返回 None。
+        """
+        if not isinstance(reference_suspicious_report, dict):
+            return None
+        value = reference_suspicious_report.get("total_question_marks")
+        return value if isinstance(value, int) else None
+
+    def read_reference_private_use_count(self, reference_suspicious_report: dict | list | None) -> int | None:
+        """
+        从参考异常报告中读取已清理的私有区字符数量。
+
+        @params:
+            reference_suspicious_report: 参考异常字符报告内容。
+
+        @return:
+            参考报告中的私有区字符数量；若不可用则返回 None。
+        """
+        if not isinstance(reference_suspicious_report, dict):
+            return None
+        value = reference_suspicious_report.get("removed_private_use_char_count")
+        return value if isinstance(value, int) else None

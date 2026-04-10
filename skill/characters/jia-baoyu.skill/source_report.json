@@ -1,0 +1,43 @@
+{
+  "character_id": "jia-baoyu",
+  "character_name": "贾宝玉",
+  "aliases": [
+    "宝玉",
+    "怡红公子",
+    "宝二爷"
+  ],
+  "identity_terms": [
+    "怡红公子",
+    "宝二爷",
+    "贾宝玉",
+    "宝玉"
+  ],
+  "evidence_terms": [
+    "怡红公子",
+    "宝二爷",
+    "贾宝玉",
+    "宝玉"
+  ],
+  "exclude_terms": [
+    "通灵宝玉",
+    "甄宝玉"
+  ],
+  "relation_count": 41,
+  "evidence_count": 1209,
+  "ranked_evidence_count": 1209,
+  "style_evidence_count": 399,
+  "relation_label_counts": {
+    "子": 2,
+    "奴仆": 15,
+    "丫鬟": 17,
+    "乳母": 4,
+    "妾": 1,
+    "朋友": 1,
+    "妻": 1
+  },
+  "source_files": {
+    "triples_csv": "data/input/triples.csv",
+    "passages_jsonl": "data/output/passages.jsonl",
+    "manifest_json": "skill/characters/jia-baoyu.skill/manifest.json"
+  }
+}
