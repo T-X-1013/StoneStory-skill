@@ -2,59 +2,138 @@
 
 围绕《红楼梦》构建的开源 skill 项目。
 
-第一版目标包括：
+当前项目重点包括：
 
-- 《红楼梦》知识问答
-- 角色对话
-- 原文检索与章节定位
-- 结构化数据构建
+- 《红楼梦》基础数据构建
+- 人物 skill 资产生成
+- 人物对话上下文构造
+- 人物回答评估
+- Codex skill / plugin 入口整理
 
-当前已完成的数据构建模块：
+当前仓库已经支持通过 Codex skill 发起人物对话，但仓库内部还没有沉淀出独立的“人物回答生成模块”。
 
-- 输入：UTF-8 编码的《红楼梦》清洗文本
-- 输出：`chapters.json`、`passages.jsonl`、`build_report.json`
-- 切分层级：章回、段落
-- 技术方案：Python 标准库实现，轻依赖
+## 当前能力
 
-当前已完成的人物 skill 第一版生成模块：
+### 1. 基础数据构建
 
-- 输入：`triples.csv`、`passages.jsonl`、人物 `manifest.json`
-- 输出：`relations.md`、`evidence_passages.jsonl`、`evidence_ranked.jsonl`、`style_evidence.jsonl`、`source_report.json`
-- 生成原则：先抽取可证实关系和原文证据，不直接写无证据的人物判断
-- 当前包含两层证据处理：角色相关段落去噪、风格证据提炼
+输入：
 
-## 目录
+- `data/input/StoneStory.txt`
 
-- `AGENTS.md`：项目协作约束与交付规范
-- `CURRENT_TASK.md`：当前阶段任务说明
-- `skill/`：技能资产目录，存放知识说明、角色配置、Prompt 等 Markdown / 配置文件
-- `tools/databuilder/`：离线数据构建工具代码
-- `tools/characterskill/`：人物 skill 第一版生成工具代码
-- `docs/data-builder.md`：模块设计说明
-- `docs/character-skill-builder.md`：人物 skill 生成设计说明
-- `data/output/`：默认输出目录
+输出：
 
-## 运行方式
+- `data/output/chapters.json`
+- `data/output/passages.jsonl`
+- `data/output/build_report.json`
 
-```bash
-python3 main.py
+当前能力：
+
+- 按章回切分
+- 按段落切分
+- 生成稳定 ID
+- 输出基础校验报告
+
+### 2. 人物 skill 资产生成
+
+输入：
+
+- `data/input/triples.csv`
+- `data/output/passages.jsonl`
+- `skill/characters/*/*.skill/manifest.json`
+
+输出：
+
+- `relations.md`
+- `evidence_passages.jsonl`
+- `evidence_ranked.jsonl`
+- `style_evidence.jsonl`
+- `style_summary_candidates.json`
+- `source_report.json`
+- `style.md`
+
+当前原则：
+
+- 先抽取可证实关系和原文证据
+- 不直接写无证据支撑的人物判断
+
+### 3. 人物对话上下文构造
+
+输入：
+
+- `character_id`
+- 用户问题
+- 人物 skill 资产目录
+
+输出：
+
+- `data/output/character_chat/<character-id>_prompt_payload.json`
+
+当前能力：
+
+- 检索人物关系、风格证据、事实证据
+- 组装模型可消费的结构化上下文
+
+### 4. 人物回答评估
+
+输入：
+
+- `prompt_payload.json`
+- 角色回答文本或回答文件
+
+输出：
+
+- `data/eval/*.json`
+
+当前能力：
+
+- 汇总基础风险信号
+- 预填人工 rubric
+
+## 使用方式
+
+### 1. 在 Codex 中发起人物对话
+
+当前面向使用者的主入口是 StoneStory skill。
+
+在 Codex 中使用：
+
+```text
+/skills
 ```
 
-也可以显式传参：
+然后选择：
+
+- `stonestory:baoyu-chat`
+- `stonestory:daiyu-chat`
+- `stonestory:stonestory-roleplay`
+
+详细说明见：
+
+- `docs/stonestory-skill-chat.md`
+
+### 2. 本地构造对话上下文
 
 ```bash
-python3 main.py \
-  --input data/input/StoneStory.txt \
-  --output-dir data/output
+python3 main_character_chat.py --character-id jia-baoyu --query "你怎么看黛玉？"
 ```
 
-运行人物 skill 第一版生成器：
+或使用本地脚本：
 
 ```bash
-python3 main_character_skill.py
+bash scripts/baoyu-chat "你怎么看黛玉？"
 ```
 
-## 测试方式
+这些命令主要用于调试、检查 `prompt_payload.json` 和离线验证，不是当前主对话入口。
+
+### 3. 本地执行评估
+
+```bash
+python3 main_character_eval.py \
+  --payload data/output/character_chat/jia-baoyu_prompt_payload.json \
+  --response "妹妹自然是极好的人，我岂敢轻慢。[passage_001716]"
+```
+
+## 测试
 
 运行当前回归测试：
 
@@ -62,45 +141,74 @@ python3 main_character_skill.py
 python3 -m unittest discover -s tests -v
 ```
 
-当前测试会覆盖：
+当前测试覆盖：
 
-- `120` 回与 `3028` 段的构建基线
-- `build_report.json` 的汇总统计
-- 可疑字符字符级告警字段
-- `chapters.json` 与 `passages.jsonl` 的落盘一致性
-- 人物 skill 生成器的关系抽取与证据过滤规则
-- 人物去噪打分与风格证据筛选规则
+- 数据构建与校验
+- 可疑字符字符级告警
+- 人物关系抽取与证据过滤
+- 风格证据去噪与候选生成
+- 人物对话 `prompt_payload` 生成
+- 人物回答评估报告生成
 
-## 输出说明
+## 目录
 
-`chapters.json` 中每个 chapter 当前包含：
+- `AGENTS.md`
+  - 项目协作约束与交付规范
+- `CURRENT_TASK.md`
+  - 当前阶段任务说明
+- `data/`
+  - 输入数据、构建输出、评估结果
+- `skill/`
+  - 项目运行时人物资产与知识资产
+- `plugins/stonestory/`
+  - StoneStory Codex plugin 与 skill 入口
+- `tools/databuilder/`
+  - 基础数据构建工具
+- `tools/characterskill/`
+  - 人物资产生成工具
+- `tools/characterchat/`
+  - 人物对话上下文构造工具
+- `tools/charactereval/`
+  - 人物回答评估工具
+- `scripts/`
+  - 本地调试脚本
+- `docs/`
+  - 项目设计与使用说明
 
-- `chapter_id`
-- `chapter_no`
-- `chapter_label`
-- `title`
-- `paragraph_count`
-- `source_text_length`
+## 文档
 
-`passages.jsonl` 中每个 passage 当前包含：
+- `docs/data-builder.md`
+  - 基础数据构建说明
+- `docs/character-skill-builder.md`
+  - 人物 skill 资产生成说明
+- `docs/character-chat-plan.md`
+  - 人物对话开发路线图
+- `docs/character-chat-implementation.md`
+  - 已落地的人物对话实现说明
+- `docs/character-chat-eval.md`
+  - 人物回答评估模块说明
+- `docs/character-reply-generation.md`
+  - 人物回答生成模块设计
+- `docs/stonestory-plugin-layout.md`
+  - plugin / skill / tools / data 结构说明
+- `docs/stonestory-skill-chat.md`
+  - StoneStory skill 对话说明
+- `docs/stonestory-terminal-commands.md`
+  - 本地脚本与调试说明
 
-- `passage_id`
-- `chapter_id`
-- `paragraph_id`
-- `paragraph_no`
-- `text`
+## 当前边界
 
-`build_report.json` 当前包含：
+当前已经具备：
 
-- `status`
-- `summary`
-- `issues`
+- 数据构建
+- 人物资产生成
+- 对话上下文构造
+- 对话评估
+- Codex skill 入口
+- 可通过 skill 发起单轮人物对话
 
-其中 `summary` 会记录 chapter 数、passage 数、错误数、警告数，`issues` 会记录章节连续性、空 passage、可疑字符等校验结果。
+当前尚不具备：
 
-后续可以在此基础上继续扩展：
-
-- 章节摘要
-- 人物关系索引
-- 描述反查原文
-- 贾宝玉 / 林黛玉角色配置与对话数据
+- 独立的回答生成代码层
+- 稳定多轮状态管理
+- 自动化回答优劣裁判

@@ -1,0 +1,73 @@
+{
+  "status": "pending_manual_review",
+  "generated_at": "2026-04-11T14:03:23+08:00",
+  "character_id": "jia-baoyu",
+  "character_name": "贾宝玉",
+  "user_query": "你怎么看黛玉？",
+  "response": {
+    "response_text": "妹妹自然是极好的人。[passage_001716]",
+    "cited_passage_ids": [
+      "passage_001716"
+    ],
+    "response_source": "inline"
+  },
+  "auto_checks": {
+    "response_nonempty": true,
+    "response_length_chars": 26,
+    "query_term_hits": [],
+    "query_term_miss_count": 1,
+    "retrieval_passage_count": 8,
+    "cited_passage_ids": [
+      "passage_001716"
+    ],
+    "valid_citations": [
+      "passage_001716"
+    ],
+    "invalid_citations": [],
+    "modern_expression_hits": [],
+    "uncertainty_hits": [],
+    "contains_character_name": false
+  },
+  "manual_rubric": {
+    "in_character": {
+      "question": "回答是否像这个人物。",
+      "score": null,
+      "scale": "1-5",
+      "note": ""
+    },
+    "answers_user_question": {
+      "question": "回答是否正面回应了用户问题。",
+      "score": null,
+      "scale": "1-5",
+      "note": ""
+    },
+    "grounded_in_evidence": {
+      "question": "回答是否能回溯到检索证据。",
+      "score": null,
+      "scale": "1-5",
+      "note": ""
+    },
+    "not_modernized": {
+      "question": "回答是否避免了明显现代化表达。",
+      "score": null,
+      "scale": "1-5",
+      "note": ""
+    },
+    "hallucination_risk": {
+      "question": "回答是否存在较高胡编风险。",
+      "score": null,
+      "scale": "1-5",
+      "note": ""
+    }
+  },
+  "reviewer_guidance": [
+    "先看 automatic checks，再决定是否需要回查 prompt payload 中的证据段落。",
+    "若回答引用了 passage_id，优先核对该引用是否来自当前检索结果。",
+    "若回答出现明显现代表达，不必直接判零，但应在 not_modernized 中说明影响。",
+    "若回答主动说明证据不足，可在 grounded_in_evidence 中酌情加分。"
+  ],
+  "source_files": {
+    "prompt_payload": "data/output/character_chat/jia-baoyu_prompt_payload.json",
+    "response_source": "inline"
+  }
+}

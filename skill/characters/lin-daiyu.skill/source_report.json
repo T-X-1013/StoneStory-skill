@@ -22,7 +22,8 @@
   "relation_count": 6,
   "evidence_count": 553,
   "ranked_evidence_count": 553,
-  "style_evidence_count": 231,
+  "style_evidence_count": 163,
+  "style_summary_count": 3,
   "relation_label_counts": {
     "女": 1,
     "丫鬟": 4,

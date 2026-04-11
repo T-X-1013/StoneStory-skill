@@ -1,0 +1,49 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+PROJECT_ROOT="$(cd "${SCRIPT_DIR}/.." && pwd)"
+
+usage() {
+  cat <<'EOF'
+StoneStory 对话上下文构造命令
+
+用法：
+  scripts/stonestory-chat <character-id> <question>
+
+示例：
+  scripts/stonestory-chat jia-baoyu "你怎么看黛玉？"
+  scripts/stonestory-chat lin-daiyu "你怎么看宝玉？"
+
+支持的 character-id：
+  jia-baoyu
+  lin-daiyu
+EOF
+}
+
+if [[ "${1:-}" == "-h" || "${1:-}" == "--help" ]]; then
+  usage
+  exit 0
+fi
+
+if [[ $# -lt 2 ]]; then
+  usage
+  exit 1
+fi
+
+CHARACTER_ID="$1"
+shift
+QUESTION="$*"
+
+case "${CHARACTER_ID}" in
+  jia-baoyu|lin-daiyu) ;;
+  *)
+    echo "Unsupported character-id: ${CHARACTER_ID}" >&2
+    usage
+    exit 1
+    ;;
+esac
+
+cd "${PROJECT_ROOT}"
+python3 main_character_chat.py --character-id "${CHARACTER_ID}" --query "${QUESTION}"

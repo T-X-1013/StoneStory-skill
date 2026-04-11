@@ -25,7 +25,8 @@
   "relation_count": 41,
   "evidence_count": 1209,
   "ranked_evidence_count": 1209,
-  "style_evidence_count": 399,
+  "style_evidence_count": 393,
+  "style_summary_count": 3,
   "relation_label_counts": {
     "子": 2,
     "奴仆": 15,

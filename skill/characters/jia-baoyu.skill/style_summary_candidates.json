@@ -1,0 +1,65 @@
+[
+  {
+    "trait": "direct_speech_presence",
+    "title": "直接发话证据稳定",
+    "description": "贾宝玉当前已有较稳定的直接发话证据，可作为后续人物口吻分析的主要依据。",
+    "rationale": "风格证据中存在明确的“人物名 + 发话标记”组合，说明这些段落可直接用于分析人物如何说话。",
+    "evidence_passage_ids": [
+      "passage_002898",
+      "passage_002901",
+      "passage_000518",
+      "passage_001165",
+      "passage_001716"
+    ],
+    "evidence_chapter_ids": [
+      "chapter_115",
+      "chapter_115",
+      "chapter_019",
+      "chapter_047",
+      "chapter_064"
+    ],
+    "signal_count": 393
+  },
+  {
+    "trait": "relationship_context_presence",
+    "title": "风格证据常伴随关系对象",
+    "description": "贾宝玉的部分风格证据与其他人物同段出现，后续可进一步分析其对不同对象的语气差异。",
+    "rationale": "同一段中同时命中多个识别词，说明这些证据常带有人物关系上下文，适合后续做对象相关的语气分析。",
+    "evidence_passage_ids": [
+      "passage_002898",
+      "passage_002901",
+      "passage_000518",
+      "passage_001165",
+      "passage_001716"
+    ],
+    "evidence_chapter_ids": [
+      "chapter_115",
+      "chapter_115",
+      "chapter_019",
+      "chapter_047",
+      "chapter_064"
+    ],
+    "signal_count": 13
+  },
+  {
+    "trait": "dialogue_density_presence",
+    "title": "直接引语证据充足",
+    "description": "贾宝玉当前风格证据中存在较多直接引语，可支撑后续对表达节奏和措辞方式的细化分析。",
+    "rationale": "直接引语段落比纯叙述段落更适合观察人物措辞和句式，因此被优先纳入风格总结候选。",
+    "evidence_passage_ids": [
+      "passage_002898",
+      "passage_002901",
+      "passage_000518",
+      "passage_001165",
+      "passage_001716"
+    ],
+    "evidence_chapter_ids": [
+      "chapter_115",
+      "chapter_115",
+      "chapter_019",
+      "chapter_047",
+      "chapter_064"
+    ],
+    "signal_count": 393
+  }
+]

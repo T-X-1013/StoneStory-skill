@@ -9,9 +9,10 @@
 - `evidence_passages.jsonl`：基于 `data/output/passages.jsonl` 提取的原文证据段落
 - `evidence_ranked.jsonl`：对角色相关段落做去噪和相关性打分后的结果
 - `style_evidence.jsonl`：更适合做人物说话风格分析的证据子集
+- `style_summary_candidates.json`：基于风格证据提炼的结构化风格候选结论
 - `source_report.json`：当前人物 skill 的数据来源和计数摘要
 - `persona.md`：数据约束版人物说明，不写无证据结论
-- `style.md`：风格提炼约束说明
+- `style.md`：基于候选结论整理的证据化风格文档
 - `boundaries.md`：运行时边界和禁止事项
 - `examples.md`：示例生成要求说明
 

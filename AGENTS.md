@@ -1,25 +1,72 @@
 # AGENTS.md
 
-## Project purpose
-This repository builds an open-source Hongloumeng skill project with:
-- knowledge QA
-- roleplay characters
-- quote retrieval
-- structured datasets
+## 项目目标
 
-## Tech stack
-- Main implementation language: Python
-- Documentation and task descriptions: Markdown
-- Input/output encoding: UTF-8
+本仓库用于构建围绕《红楼梦》的开源 skill 项目，当前重点包括：
 
-## Coding rules
-- Prefer clear package structure
-- Prefer Python standard libraries when possible
-- Keep chapter numbering accurate
-- Do not silently discard suspicious characters
-- Separate knowledge-base logic from roleplay logic
+- 知识问答
+- 人物角色对话
+- 原文检索与引用定位
+- 结构化数据与人物资产构建
 
-## Deliverables
-- Python source code
-- Minimal runnable entry point
-- Markdown documentation for usage and design
+## 技术栈
+
+- 主实现语言：Python
+- 项目说明、设计文档、任务说明：Markdown
+- 输入输出编码：UTF-8
+- 结构化输出优先：JSON / JSONL
+
+## 目录协作约定
+
+- `tools/`
+  - 本地工具实现层
+- `skill/`
+  - 项目运行时资产层
+- `plugins/`
+  - Codex plugin / skill 入口层
+- `data/`
+  - 输入数据、构建产物、评估结果
+- `docs/`
+  - 项目说明、设计说明、使用说明
+- `scripts/`
+  - 本地调试脚本
+
+要求：
+
+- 不要把数据处理代码写入 `skill/`
+- 不要把运行时人物资产写入 `tools/`
+- plugin 入口与本地工具实现应分离
+
+## 编码规则
+
+- 优先保持清晰的包结构
+- 优先使用 Python 标准库
+- 保持章节编号与段落编号稳定
+- 不要静默丢弃可疑字符
+- 区分知识底座逻辑与人物对话逻辑
+- 区分运行时资产、入口定义和工具实现
+
+## 注释与说明规则
+
+- 包、工具、模块入口应有简短说明
+- 面向人阅读的说明优先使用中文
+- 仅在工具协议、固定键名、命令占位等场景保留必要英文
+- 若为工具脚本或模块补充说明，应写清：
+  - 作用
+  - 输入
+  - 输出
+  - 基本用法
+
+## 当前交付物要求
+
+- Python 源代码
+- 可运行的最小入口文件
+- Markdown 设计文档与使用说明
+- 结构化输出文件与对应字段说明
+
+## 当前协作重点
+
+- 优先维护已有数据构建链路
+- 优先维护人物资产生成链路
+- 通过 Codex skill 提供人物对话入口
+- 保持人物回答尽量基于本地证据

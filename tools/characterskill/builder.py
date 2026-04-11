@@ -11,10 +11,11 @@
 2. evidence_passages.jsonl
 3. evidence_ranked.jsonl
 4. style_evidence.jsonl
-5. source_report.json
-6. persona.md
-7. style.md
-8. examples.md
+5. style_summary_candidates.json
+6. source_report.json
+7. persona.md
+8. style.md
+9. examples.md
 
 用法：
     from pathlib import Path
@@ -32,6 +33,7 @@ from __future__ import annotations
 
 import csv
 import json
+import re
 from pathlib import Path
 
 from .models import (
@@ -40,6 +42,7 @@ from .models import (
     CharacterRelation,
     CharacterSkillResult,
     RankedCharacterEvidence,
+    StyleSummaryCandidate,
     StyleCharacterEvidence,
 )
 
@@ -49,6 +52,10 @@ class CharacterSkillBuilder:
 
     # 常见人物发话标记，用于提炼风格证据。
     SPEECH_MARKERS = ("道", "说道", "笑道", "问道", "答道", "叹道", "骂道", "忙道")
+    # 常见非人物专名的泛指发话主体，命中时应降低 style evidence 置信度。
+    GENERIC_SPEAKER_TERMS = {"众人", "众姐妹", "众丫鬟", "众婆子", "众媳妇", "人", "有人", "一个人", "那人"}
+    # 单条风格候选最多引用的证据条数。
+    STYLE_SUMMARY_EVIDENCE_LIMIT = 5
 
     def build_all(self, skill_root: Path, triples_file: Path, passages_file: Path) -> list[CharacterSkillResult]:
         """
@@ -166,29 +173,33 @@ class CharacterSkillBuilder:
         evidence = self.collect_evidence(manifest, passages)
         ranked_evidence = self.rank_evidence(manifest, evidence)
         style_evidence = self.extract_style_evidence(manifest, ranked_evidence)
+        style_summary_candidates = self.build_style_summary_candidates(manifest, style_evidence)
 
         relations_output = manifest.skill_dir / "relations.md"
         evidence_output = manifest.skill_dir / "evidence_passages.jsonl"
         ranked_evidence_output = manifest.skill_dir / "evidence_ranked.jsonl"
         style_evidence_output = manifest.skill_dir / "style_evidence.jsonl"
+        style_summary_output = manifest.skill_dir / "style_summary_candidates.json"
         report_output = manifest.skill_dir / "source_report.json"
 
         self.write_relations_markdown(manifest, relations, relations_output)
         self.write_evidence_jsonl(evidence, evidence_output)
         self.write_ranked_evidence_jsonl(ranked_evidence, ranked_evidence_output)
         self.write_style_evidence_jsonl(style_evidence, style_evidence_output)
+        self.write_style_summary_candidates(style_summary_candidates, style_summary_output)
         self.write_source_report(
             manifest,
             relations,
             evidence,
             ranked_evidence,
             style_evidence,
+            style_summary_candidates,
             triples_file,
             passages_file,
             report_output,
         )
         self.write_persona_markdown(manifest, relations, evidence, manifest.skill_dir / "persona.md")
-        self.write_style_markdown(manifest, ranked_evidence, style_evidence, manifest.skill_dir / "style.md")
+        self.write_style_markdown(manifest, style_summary_candidates, style_evidence, manifest.skill_dir / "style.md")
         self.write_examples_markdown(manifest, manifest.skill_dir / "examples.md")
         self.write_skill_readme(manifest, manifest.skill_dir / "README.md")
 
@@ -200,10 +211,12 @@ class CharacterSkillBuilder:
             evidence_count=len(evidence),
             ranked_evidence_count=len(ranked_evidence),
             style_evidence_count=len(style_evidence),
+            style_summary_count=len(style_summary_candidates),
             relations_output=relations_output,
             evidence_output=evidence_output,
             ranked_evidence_output=ranked_evidence_output,
             style_evidence_output=style_evidence_output,
+            style_summary_output=style_summary_output,
             report_output=report_output,
         )
 
@@ -297,6 +310,8 @@ class CharacterSkillBuilder:
             signals: list[str] = []
             noise_flags: list[str] = []
             text = item.text
+            target_speaker_terms = self.find_target_speaker_terms(text, manifest)
+            speaker_candidates = self.find_speaker_candidates(text)
 
             if manifest.name in text:
                 score += 5
@@ -314,13 +329,20 @@ class CharacterSkillBuilder:
                 score += 2
                 signals.append("contains_dialogue_quotes")
 
-            if self.contains_speech_signal(text, manifest):
-                score += 3
-                signals.append("contains_speech_marker")
+            if target_speaker_terms:
+                score += 4
+                signals.append("contains_target_speech_marker")
+            elif self.contains_speech_signal(text, manifest):
+                score += 1
+                signals.append("contains_uncertain_speech_marker")
 
             if self.contains_arrival_or_presence_signal(text, item.matched_terms):
                 score += 1
                 signals.append("contains_presence_signal")
+
+            if self.contains_direct_dialogue(text):
+                score += 1
+                signals.append("contains_direct_dialogue")
 
             if manifest.name not in text and all(len(term) <= 2 for term in item.matched_terms):
                 score -= 2
@@ -334,7 +356,19 @@ class CharacterSkillBuilder:
                 score -= 3
                 noise_flags.append("contains_other_character_name")
 
-            if "“" not in text and "”" not in text and not self.contains_speech_signal(text, manifest):
+            if self.contains_direct_dialogue(text) and not target_speaker_terms and speaker_candidates:
+                score -= 3
+                noise_flags.append("target_not_confirmed_as_speaker")
+
+            if len(speaker_candidates) > 1:
+                score -= 1
+                noise_flags.append("multiple_speaker_candidates")
+
+            if any(term in self.GENERIC_SPEAKER_TERMS for term in speaker_candidates) and not target_speaker_terms:
+                score -= 2
+                noise_flags.append("generic_speaker_context")
+
+            if "“" not in text and "”" not in text and not target_speaker_terms:
                 score -= 1
                 noise_flags.append("no_dialogue_signal")
 
@@ -380,7 +414,11 @@ class CharacterSkillBuilder:
             signal_type = self.detect_style_signal_type(item.text, manifest)
             if signal_type is None:
                 continue
-            if item.score < 2:
+            if item.score < 4:
+                continue
+            if "target_not_confirmed_as_speaker" in item.noise_flags:
+                continue
+            if "generic_speaker_context" in item.noise_flags:
                 continue
 
             style_items.append(
@@ -400,6 +438,115 @@ class CharacterSkillBuilder:
             )
 
         return style_items
+
+    def build_style_summary_candidates(
+        self,
+        manifest: CharacterManifest,
+        style_evidence: list[StyleCharacterEvidence],
+    ) -> list[StyleSummaryCandidate]:
+        """
+        从风格证据中提炼结构化风格候选结论。
+
+        @params:
+            manifest: 人物 manifest 配置。
+            style_evidence: 风格证据段落列表。
+
+        @return:
+            风格总结候选列表。
+        """
+        if not style_evidence:
+            return []
+
+        candidates = [self.build_direct_speech_candidate(manifest, style_evidence)]
+
+        if any(len(item.matched_terms) >= 2 for item in style_evidence):
+            candidates.append(self.build_relationship_context_candidate(manifest, style_evidence))
+
+        if any("contains_direct_dialogue" in item.signals for item in style_evidence):
+            candidates.append(self.build_dialogue_density_candidate(manifest, style_evidence))
+
+        return [candidate for candidate in candidates if candidate.signal_count > 0]
+
+    def build_direct_speech_candidate(
+        self,
+        manifest: CharacterManifest,
+        style_evidence: list[StyleCharacterEvidence],
+    ) -> StyleSummaryCandidate:
+        """
+        构建“直接发话证据稳定”风格候选。
+
+        @params:
+            manifest: 人物 manifest 配置。
+            style_evidence: 风格证据段落列表。
+
+        @return:
+            风格总结候选对象。
+        """
+        filtered = [item for item in style_evidence if item.signal_type == "speech_marker"]
+        selected = filtered[: self.STYLE_SUMMARY_EVIDENCE_LIMIT]
+        return StyleSummaryCandidate(
+            trait="direct_speech_presence",
+            title="直接发话证据稳定",
+            description=f"{manifest.name}当前已有较稳定的直接发话证据，可作为后续人物口吻分析的主要依据。",
+            rationale="风格证据中存在明确的“人物名 + 发话标记”组合，说明这些段落可直接用于分析人物如何说话。",
+            evidence_passage_ids=[item.passage_id for item in selected],
+            evidence_chapter_ids=[item.chapter_id for item in selected],
+            signal_count=len(filtered),
+        )
+
+    def build_relationship_context_candidate(
+        self,
+        manifest: CharacterManifest,
+        style_evidence: list[StyleCharacterEvidence],
+    ) -> StyleSummaryCandidate:
+        """
+        构建“风格证据常伴随关系对象”风格候选。
+
+        @params:
+            manifest: 人物 manifest 配置。
+            style_evidence: 风格证据段落列表。
+
+        @return:
+            风格总结候选对象。
+        """
+        filtered = [item for item in style_evidence if len(item.matched_terms) >= 2]
+        selected = filtered[: self.STYLE_SUMMARY_EVIDENCE_LIMIT]
+        return StyleSummaryCandidate(
+            trait="relationship_context_presence",
+            title="风格证据常伴随关系对象",
+            description=f"{manifest.name}的部分风格证据与其他人物同段出现，后续可进一步分析其对不同对象的语气差异。",
+            rationale="同一段中同时命中多个识别词，说明这些证据常带有人物关系上下文，适合后续做对象相关的语气分析。",
+            evidence_passage_ids=[item.passage_id for item in selected],
+            evidence_chapter_ids=[item.chapter_id for item in selected],
+            signal_count=len(filtered),
+        )
+
+    def build_dialogue_density_candidate(
+        self,
+        manifest: CharacterManifest,
+        style_evidence: list[StyleCharacterEvidence],
+    ) -> StyleSummaryCandidate:
+        """
+        构建“直接引语证据充足”风格候选。
+
+        @params:
+            manifest: 人物 manifest 配置。
+            style_evidence: 风格证据段落列表。
+
+        @return:
+            风格总结候选对象。
+        """
+        filtered = [item for item in style_evidence if "contains_direct_dialogue" in item.signals]
+        selected = filtered[: self.STYLE_SUMMARY_EVIDENCE_LIMIT]
+        return StyleSummaryCandidate(
+            trait="dialogue_density_presence",
+            title="直接引语证据充足",
+            description=f"{manifest.name}当前风格证据中存在较多直接引语，可支撑后续对表达节奏和措辞方式的细化分析。",
+            rationale="直接引语段落比纯叙述段落更适合观察人物措辞和句式，因此被优先纳入风格总结候选。",
+            evidence_passage_ids=[item.passage_id for item in selected],
+            evidence_chapter_ids=[item.chapter_id for item in selected],
+            signal_count=len(filtered),
+        )
 
     def resolve_evidence_terms(self, manifest: CharacterManifest) -> list[str]:
         """
@@ -476,6 +623,24 @@ class CharacterSkillBuilder:
             start = text.find(term, start + 1)
         return False
 
+    def unique_preserving_order(self, items) -> list[str]:
+        """
+        对可迭代对象去重并保持原有顺序。
+
+        @params:
+            items: 待处理可迭代对象。
+
+        @return:
+            去重后的字符串列表。
+        """
+        seen: set[str] = set()
+        result: list[str] = []
+        for item in items:
+            if item not in seen:
+                seen.add(item)
+                result.append(item)
+        return result
+
     def contains_speech_signal(self, text: str, manifest: CharacterManifest) -> bool:
         """
         判断一段文本中是否存在人物相关的发话信号。
@@ -492,6 +657,57 @@ class CharacterSkillBuilder:
                 if f"{term}{marker}" in text:
                     return True
         return False
+
+    def contains_direct_dialogue(self, text: str) -> bool:
+        """
+        判断一段文本中是否包含直接引语。
+
+        @params:
+            text: 待检查文本。
+
+        @return:
+            若包含成对引号则返回 True，否则返回 False。
+        """
+        return "“" in text and "”" in text
+
+    def find_target_speaker_terms(self, text: str, manifest: CharacterManifest) -> list[str]:
+        """
+        找出文本中明确作为发话人的目标人物称谓。
+
+        @params:
+            text: 待检查文本。
+            manifest: 人物 manifest 配置。
+
+        @return:
+            命中的目标发话人称谓列表。
+        """
+        found: list[str] = []
+        for term in manifest.identity_terms:
+            for marker in self.SPEECH_MARKERS:
+                if f"{term}{marker}" in text:
+                    found.append(term)
+                    break
+        return found
+
+    def find_speaker_candidates(self, text: str) -> list[str]:
+        """
+        从文本中提取发话人候选称谓。
+
+        @params:
+            text: 待检查文本。
+
+        @return:
+            去重后的发话人候选列表。
+        """
+        candidates: list[str] = []
+        pattern = re.compile(r"([\u4e00-\u9fff]{1,6}?)(?:忙)?(?:笑|问|答|叹|骂)?(?:说道|道)")
+
+        for candidate in pattern.findall(text):
+            cleaned = candidate.strip("：:，。；、“”‘’（）() ")
+            if cleaned and cleaned not in candidates:
+                candidates.append(cleaned)
+
+        return candidates
 
     def contains_arrival_or_presence_signal(self, text: str, matched_terms: list[str]) -> bool:
         """
@@ -518,10 +734,9 @@ class CharacterSkillBuilder:
         @return:
             风格证据类型；若不适合作为风格证据则返回 None。
         """
-        if self.contains_speech_signal(text, manifest):
+        target_speaker_terms = self.find_target_speaker_terms(text, manifest)
+        if target_speaker_terms:
             return "speech_marker"
-        if "“" in text and "”" in text and manifest.name in text:
-            return "named_dialogue_context"
         return None
 
     def write_relations_markdown(
@@ -612,6 +827,24 @@ class CharacterSkillBuilder:
         content = "\n".join(json.dumps(item.to_dict(), ensure_ascii=False) for item in style_evidence)
         output_file.write_text((content + "\n") if content else "", encoding="utf-8")
 
+    def write_style_summary_candidates(
+        self,
+        style_summary_candidates: list[StyleSummaryCandidate],
+        output_file: Path,
+    ) -> None:
+        """
+        将风格候选结论写成 JSON 文件。
+
+        @params:
+            style_summary_candidates: 风格总结候选列表。
+            output_file: style_summary_candidates.json 输出路径。
+
+        @return:
+            None。
+        """
+        data = [item.to_dict() for item in style_summary_candidates]
+        output_file.write_text(json.dumps(data, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+
     def write_source_report(
         self,
         manifest: CharacterManifest,
@@ -619,6 +852,7 @@ class CharacterSkillBuilder:
         evidence: list[CharacterEvidence],
         ranked_evidence: list[RankedCharacterEvidence],
         style_evidence: list[StyleCharacterEvidence],
+        style_summary_candidates: list[StyleSummaryCandidate],
         triples_file: Path,
         passages_file: Path,
         output_file: Path,
@@ -632,6 +866,7 @@ class CharacterSkillBuilder:
             evidence: 人物证据段落列表。
             ranked_evidence: 去噪后的证据段落列表。
             style_evidence: 风格证据段落列表。
+            style_summary_candidates: 风格总结候选列表。
             triples_file: 关系三元组 CSV 文件路径。
             passages_file: 段落 JSONL 文件路径。
             output_file: source_report.json 输出路径。
@@ -655,6 +890,7 @@ class CharacterSkillBuilder:
             "evidence_count": len(evidence),
             "ranked_evidence_count": len(ranked_evidence),
             "style_evidence_count": len(style_evidence),
+            "style_summary_count": len(style_summary_candidates),
             "relation_label_counts": relation_labels,
             "source_files": {
                 "triples_csv": str(triples_file),
@@ -716,7 +952,7 @@ class CharacterSkillBuilder:
     def write_style_markdown(
         self,
         manifest: CharacterManifest,
-        ranked_evidence: list[RankedCharacterEvidence],
+        style_summary_candidates: list[StyleSummaryCandidate],
         style_evidence: list[StyleCharacterEvidence],
         output_file: Path,
     ) -> None:
@@ -725,7 +961,7 @@ class CharacterSkillBuilder:
 
         @params:
             manifest: 人物 manifest 配置。
-            ranked_evidence: 去噪后的证据段落列表。
+            style_summary_candidates: 风格总结候选列表。
             style_evidence: 风格证据段落列表。
             output_file: style.md 输出路径。
 
@@ -735,30 +971,54 @@ class CharacterSkillBuilder:
         lines = [
             f"# {manifest.name} Style",
             "",
-            "## 当前状态",
+            "## 生成说明",
             "",
-            "- 当前版本不自动写入说话风格结论。",
-            "- 原因：现有输入文件可直接支持关系事实和原文证据抽取，但尚未建立可靠的风格提炼规则。",
+            "- 本文件由 `tools/characterskill` 自动生成。",
+            "- 当前结论只基于 `style_evidence.jsonl` 中的证据整理，不写无证据支撑的风格判断。",
             "",
-            "## 已有证据基础",
+            "## 证据基础",
             "",
-            f"- 原始证据段落数：{len(ranked_evidence)}",
             f"- 风格证据段落数：{len(style_evidence)}",
-            "- 证据文件：`evidence_passages.jsonl`",
-            "- 去噪结果：`evidence_ranked.jsonl`",
             "- 风格证据：`style_evidence.jsonl`",
+            "- 风格候选：`style_summary_candidates.json`",
             "",
-            "## 当前筛选规则",
-            "",
-            "- 去噪阶段会对命中主名、别名、引语、发话标记等信号打分。",
-            "- 风格证据阶段优先保留带有人物发话标记或明确对话上下文的段落。",
-            "",
-            "## 后续约束",
-            "",
-            "- 风格结论必须可回溯到原文证据。",
-            "- 不得根据主观印象直接写入角色语气、价值倾向或心理判断。",
+            "## 当前风格结论",
             "",
         ]
+
+        if not style_summary_candidates:
+            lines.extend(
+                [
+                    "- 当前尚未提炼出足够稳定的风格候选结论。",
+                    "",
+                ]
+            )
+        else:
+            for candidate in style_summary_candidates:
+                lines.extend(
+                    [
+                        f"### {candidate.title}",
+                        "",
+                        f"- 结论：{candidate.description}",
+                        f"- 依据：{candidate.rationale}",
+                        f"- 证据条数：{candidate.signal_count}",
+                        "- 证据定位：",
+                    ]
+                )
+                for chapter_id, passage_id in zip(candidate.evidence_chapter_ids, candidate.evidence_passage_ids):
+                    lines.append(f"  - `{chapter_id}` / `{passage_id}`")
+                lines.append("")
+
+        lines.extend(
+            [
+                "## 当前约束",
+                "",
+                "- 风格结论必须可回溯到原文证据。",
+                "- 当前结论仍属于第一版候选归纳，后续可继续细化。",
+                "- 不得根据主观印象直接写入角色语气、价值倾向或心理判断。",
+                "",
+            ]
+        )
         output_file.write_text("\n".join(lines), encoding="utf-8")
 
     def write_examples_markdown(self, manifest: CharacterManifest, output_file: Path) -> None:
@@ -811,9 +1071,10 @@ class CharacterSkillBuilder:
             "- `evidence_passages.jsonl`：基于 `data/output/passages.jsonl` 提取的原文证据段落",
             "- `evidence_ranked.jsonl`：对角色相关段落做去噪和相关性打分后的结果",
             "- `style_evidence.jsonl`：更适合做人物说话风格分析的证据子集",
+            "- `style_summary_candidates.json`：基于风格证据提炼的结构化风格候选结论",
             "- `source_report.json`：当前人物 skill 的数据来源和计数摘要",
             "- `persona.md`：数据约束版人物说明，不写无证据结论",
-            "- `style.md`：风格提炼约束说明",
+            "- `style.md`：基于候选结论整理的证据化风格文档",
             "- `boundaries.md`：运行时边界和禁止事项",
             "- `examples.md`：示例生成要求说明",
             "",

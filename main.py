@@ -1,4 +1,4 @@
-"""Python entry point for Hongloumeng dataset generation."""
+"""《红楼梦》基础数据构建入口。"""
 
 from tools.databuilder.cli import main
 

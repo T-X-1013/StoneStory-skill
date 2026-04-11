@@ -1,0 +1,33 @@
+{
+  "name": "stonestory",
+  "version": "0.1.0",
+  "description": "StoneStory skills and plugin workflows for Hongloumeng character chat inside Codex.",
+  "author": {
+    "name": "tao"
+  },
+  "license": "MIT",
+  "keywords": [
+    "stonestory",
+    "hongloumeng",
+    "roleplay",
+    "skill",
+    "character-chat"
+  ],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "StoneStory",
+    "shortDescription": "Use Hongloumeng character chat skills inside Codex",
+    "longDescription": "Adds StoneStory character-chat skills, evidence-backed prompt assembly, and answer-evaluation workflows using the current Codex model and local StoneStory assets.",
+    "developerName": "tao",
+    "category": "Writing",
+    "capabilities": [
+      "Interactive",
+      "Write"
+    ],
+    "defaultPrompt": [
+      "Use /skills and select stonestory:baoyu-chat to talk as 贾宝玉",
+      "Use /skills and select stonestory:daiyu-chat to talk as 林黛玉",
+      "Use /skills and select stonestory:stonestory-roleplay for the shared StoneStory entry"
+    ]
+  }
+}

@@ -12,7 +12,8 @@
 3. 人物证据段落模型
 4. 去噪后的证据模型
 5. 风格证据模型
-6. 人物 skill 构建结果模型
+6. 风格总结候选模型
+7. 人物 skill 构建结果模型
 
 用法：
     from tools.characterskill.models import CharacterManifest, CharacterEvidence
@@ -179,6 +180,39 @@ class StyleCharacterEvidence:
 
 
 @dataclass(frozen=True)
+class StyleSummaryCandidate:
+    """表示一条带证据支撑的人物风格候选结论。"""
+
+    trait: str                        # 风格特征编码。
+    title: str                        # 风格特征标题。
+    description: str                  # 面向文档的简要结论描述。
+    rationale: str                    # 形成该结论的依据说明。
+    evidence_passage_ids: list[str]   # 支撑该结论的段落 ID 列表。
+    evidence_chapter_ids: list[str]   # 支撑该结论的章节 ID 列表。
+    signal_count: int                 # 当前结论命中的证据条数。
+
+    def to_dict(self) -> dict[str, object]:
+        """
+        将风格总结候选转换为可直接写入 JSON 的字典结构。
+
+        @params:
+            无。
+
+        @return:
+            包含风格候选字段的字典对象。
+        """
+        return {
+            "trait": self.trait,
+            "title": self.title,
+            "description": self.description,
+            "rationale": self.rationale,
+            "evidence_passage_ids": self.evidence_passage_ids,
+            "evidence_chapter_ids": self.evidence_chapter_ids,
+            "signal_count": self.signal_count,
+        }
+
+
+@dataclass(frozen=True)
 class CharacterSkillResult:
     """表示单个人物 skill 的构建结果。"""
 
@@ -189,8 +223,10 @@ class CharacterSkillResult:
     evidence_count: int             # 生成的原始证据段落条数。
     ranked_evidence_count: int      # 生成的去噪证据段落条数。
     style_evidence_count: int       # 生成的风格证据段落条数。
+    style_summary_count: int        # 生成的风格总结候选条数。
     relations_output: Path          # relations.md 输出路径。
     evidence_output: Path           # evidence_passages.jsonl 输出路径。
     ranked_evidence_output: Path    # evidence_ranked.jsonl 输出路径。
     style_evidence_output: Path     # style_evidence.jsonl 输出路径。
+    style_summary_output: Path      # style_summary_candidates.json 输出路径。
     report_output: Path             # source_report.json 输出路径。

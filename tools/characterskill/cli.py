@@ -11,10 +11,11 @@
 2. evidence_passages.jsonl
 3. evidence_ranked.jsonl
 4. style_evidence.jsonl
-5. source_report.json
-6. persona.md
-7. style.md
-8. examples.md
+5. style_summary_candidates.json
+6. source_report.json
+7. persona.md
+8. style.md
+9. examples.md
 
 用法：
     python3 main_character_skill.py
@@ -76,5 +77,6 @@ def main() -> None:
         print(
             f"- {result.character_name}: relations={result.relation_count}, "
             f"evidence={result.evidence_count}, ranked={result.ranked_evidence_count}, "
-            f"style={result.style_evidence_count}, report={result.report_output.resolve()}"
+            f"style={result.style_evidence_count}, summaries={result.style_summary_count}, "
+            f"report={result.report_output.resolve()}"
         )

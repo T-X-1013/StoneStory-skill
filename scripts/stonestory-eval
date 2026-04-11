@@ -1,0 +1,58 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+PROJECT_ROOT="$(cd "${SCRIPT_DIR}/.." && pwd)"
+
+usage() {
+  cat <<'EOF'
+StoneStory 回答评估命令
+
+用法：
+  scripts/stonestory-eval <character-id> <answer>
+
+示例：
+  scripts/stonestory-eval jia-baoyu "妹妹自然是极好的人。[passage_001716]"
+  scripts/stonestory-eval lin-daiyu "我也未敢定论。[passage_000256]"
+
+支持的 character-id：
+  jia-baoyu
+  lin-daiyu
+EOF
+}
+
+if [[ "${1:-}" == "-h" || "${1:-}" == "--help" ]]; then
+  usage
+  exit 0
+fi
+
+if [[ $# -lt 2 ]]; then
+  usage
+  exit 1
+fi
+
+CHARACTER_ID="$1"
+shift
+ANSWER="$*"
+
+case "${CHARACTER_ID}" in
+  jia-baoyu|lin-daiyu) ;;
+  *)
+    echo "Unsupported character-id: ${CHARACTER_ID}" >&2
+    usage
+    exit 1
+    ;;
+esac
+
+PAYLOAD_FILE="data/output/character_chat/${CHARACTER_ID}_prompt_payload.json"
+
+cd "${PROJECT_ROOT}"
+
+if [[ ! -f "${PAYLOAD_FILE}" ]]; then
+  echo "Payload file not found: ${PROJECT_ROOT}/${PAYLOAD_FILE}" >&2
+  echo "Run scripts/stonestory-chat first." >&2
+  exit 1
+fi
+
+python3 main_character_eval.py --payload "${PAYLOAD_FILE}" --response "${ANSWER}"
